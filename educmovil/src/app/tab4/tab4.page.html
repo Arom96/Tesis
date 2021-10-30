@@ -1,0 +1,37 @@
+<ion-content class="background">
+  <div style="position: absolute;margin-top: 70px;">
+    <button ion-button large style="background: transparent;width: 40px;height: 40px;" (click)="goback()">
+      <ion-icon style="font-size: 30px;" name="arrow-back-outline"></ion-icon>
+    </button>
+  </div>
+  <div>
+    <h1 style="margin-top: 60px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 30px;
+    padding: 5px;
+    border: 6px solid royalblue;
+    border-radius: 10px;">{{ title }}</h1>
+  </div>
+  <div>
+    <h3 style="text-align: center;">
+      {{ desc }}
+    </h3>
+  </div>
+  <ion-grid>
+    <ion-row>
+      <ion-col class='cardRestaurant' *ngFor="let cat of temas; let i = index"  style="margin-top: 40px;">
+        <ion-card style="min-height: auto;min-width: 120px;margin: 2px; width: 93vw;">
+          <ion-card-content>
+            <ion-card-title style="text-align: center;">
+              <span class="textCardRestaurant">{{ cat.nombre }}</span>
+            </ion-card-title>
+            <ion-button shape="round" expand="full" fill="solid" color="tertiary" (click)="changeTab(cat.nombre)">
+              Ver Tema
+            </ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
