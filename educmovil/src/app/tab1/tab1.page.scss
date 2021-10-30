@@ -1,0 +1,61 @@
+.circular {
+    border-radius: 100% !important;
+    padding: 0 !important;
+}
+
+.centrado {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.toolbarImage {
+    width: 30px;
+    height: 30px;
+}
+
+.contenido {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toolbarImage {
+    width: 30px;
+    height: 30px;
+}
+
+.circular {
+    border-radius: 50%;
+}
+
+.salir {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+}
+
+.espaciado {
+    margin-right: 20px;
+}
+
+.img-avatar {
+    height: 200px;
+    width: 225px;
+    border-radius: 50%;
+}
+
+.contorno {
+    margin-top: 10px;
+    width: 100%;
+}
+
+.colores {
+    color: black;
+}
+
+ion-content.background{
+    --background: url(../../assets/Bacground.png) 0 0/100% 100% no-repeat;
+}

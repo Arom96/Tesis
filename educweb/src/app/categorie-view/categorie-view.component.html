@@ -1,0 +1,57 @@
+<div>
+    <div style="display: flex;flex-direction: column;font-family: 'Roboto';margin: 10px;">
+        <div style="position: relative;text-align: center;">
+            <img [src]="catSelected.cover" style="object-fit: cover;width: 100%;height: 270px;border-radius: 10px;">
+            <div style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);width: 100%;">
+                <div style="border: 2px solid;border-radius: 15px;margin: 19%;height: 60px;vertical-align: middle;display: flex;align-content: center;align-items: center;justify-content: center;background: black;opacity: 90%;">
+                    <span style="color: white;">
+                        {{ catSelected.name }}
+                    </span>
+                </div>
+            </div>
+        </div>
+        <!-- <span style="font-size: 25px;font-weight: bold;">
+            Bienvenidos a los cursos de Aquitectura de Computadoras
+        </span>
+        <span style="font-size: 23px;font-weight: bold;margin-bottom: 20px;">
+            Escuela Politecnica Nacional
+        </span> -->
+    </div>
+    <div style="border: 2px solid;padding: 10px;border-radius: 10px;margin: 5px;">
+        <div style="display: flex;margin-bottom: 20px;flex-direction: column;">
+            <span style="font-size: 25px;font-weight: bold;">Descripcion</span>
+            <span style="font-size: 14px;">{{ catSelected.desc }}</span>
+        </div>           
+    </div>
+    <div style="border: 2px solid;padding: 10px;border-radius: 10px;margin: 5px;">
+        <div style="display: flex;margin-bottom: 20px;flex-direction: column;">
+            <span style="font-size: 25px;font-weight: bold;">Temas</span>
+            <span style="font-size: 14px;">Estos son los temas disponibles.</span>
+        </div>   
+        <div class="coursesContainer">
+            <mat-tab-group>
+                <div *ngFor="let tema of temasSelected">
+                    <mat-tab [label]="tema.nombre">
+                        <ul style="text-align: left;">
+                            <div *ngFor="let lecture of tema.lecturas">
+                              <li>{{ lecture.nombre }} <button mat-button (click)="goToLink(lecture.doc)" style="margin-left: 10px;margin: 7px;border: 2px solid #FCB823;border-radius: 11px;">ver</button></li>
+                            </div>
+                            <mat-divider></mat-divider>
+                            <div *ngFor="let quiz of tema.pruebas">
+                                <li>{{ quiz.name }} <button mat-button (click)="goToLink(quiz.url)" style="margin-left: 10px;margin: 7px;border: 2px solid #FCB823;border-radius: 11px;">ver</button></li>
+                            </div>
+                        </ul>
+                    </mat-tab>
+                </div>
+            </mat-tab-group>
+        </div> 
+        
+    </div>
+    
+</div>
+<footer style="position: relative;bottom: 0;width: 100%;">
+    <div style="padding: 20px;font-size: 18px;font-weight: bold;text-align-last: center;background: #001f3e;color: white;">
+      <span>Todos los derechos reservados CopyRight© 2021</span>
+    </div>
+</footer>
+

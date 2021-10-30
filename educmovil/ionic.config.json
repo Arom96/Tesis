@@ -1,0 +1,7 @@
+{
+  "name": "educweb",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,49 @@
+<ion-content class="background">
+  <ion-grid  style="margin-top: 30px;">
+    <ion-row>
+      <ion-col class='cardRestaurant' *ngFor="let ask of preguntas; let i = index"  style="margin-top: 40px;">
+        <ion-card style="min-height: auto;width: 93vw;margin: 2px;">
+          <ion-card-content>
+            <ion-card-title style="text-align: center;">
+              <span class="textCardRestaurant">{{ ask.pregunta }}</span>
+            </ion-card-title>
+            <hr style="background: white;">
+            <div>
+              <ion-list>
+                <ion-radio-group [id]='i'>              
+                  <ion-item>
+                    <ion-label class="ion-text-wrap">{{ ask.primera}}</ion-label>
+                    <ion-radio value="1"></ion-radio>
+                  </ion-item>
+              
+                  <ion-item>
+                    <ion-label class="ion-text-wrap">{{ ask.segunda}}</ion-label>
+                    <ion-radio value="2"></ion-radio>
+                  </ion-item>
+              
+                  <ion-item>
+                    <ion-label class="ion-text-wrap">{{ ask.tercera}}</ion-label>
+                    <ion-radio value="3"></ion-radio>
+                  </ion-item>
+              
+                  <ion-item>
+                    <ion-label class="ion-text-wrap">{{ ask.cuarta}}</ion-label>
+                    <ion-radio value="4"></ion-radio>
+                  </ion-item>
+                </ion-radio-group>
+              </ion-list>
+            </div>
+            <hr style="background: white;margin: 20px;">
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <div style="width: 100%;">
+        <ion-button shape="round" expand="full" fill="solid" color="tertiary" (click)="showResults()"> <!--(click)="openDoc(cat.doc)"-->
+          Finalizar
+        </ion-button>
+      </div>
+    </ion-row>   
+  </ion-grid>
+</ion-content>

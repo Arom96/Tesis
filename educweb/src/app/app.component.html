@@ -1,0 +1,66 @@
+<mat-toolbar color="primary" style="position: sticky;z-index: 1000;">
+  <img src='../assets/Buho.ico' routerLink='home' style="cursor: pointer;height: 95px;">
+  <span style="margin-left: 10px;" routerLink='home' style="cursor: pointer;">EDUCWEB</span>
+  <span style="flex: 1 1 auto;"></span>
+  <!--If not logged buttons!-->
+  <div *ngIf='!isLogged'>
+    <button mat-flat-button style="margin-right: 5px;" (click)='navigateWithParams("login")'>Iniciar Sesión</button>
+    <button mat-flat-button color="accent" (click)='navigateWithParams("register")'>Regístrate</button>
+  </div>
+  <!-- If logged account details-->
+  <div *ngIf="!isMobile">
+    <div *ngIf="router.url == '/home'">
+      <div *ngIf='isLogged' style="display: flex;align-items: center;">
+        <span>{{ User.name }}</span>
+        <div *ngIf="usrImg == ''" >
+          <button mat-icon-button style="width: auto; height: auto;" [matMenuTriggerFor]="menu">
+            <img src="../assets/user-palceholder.png" style="width: 35px; height: 35px;padding: 5px;">
+          </button>
+        </div>
+        <div *ngIf="usrImg != ''" style="display: flex;">
+          <button mat-icon-button tyle="width: 50px; height: 50px;" [matMenuTriggerFor]="menu">
+            <img [src]="usrImg" style="width: 40px; height: 40px; border-radius: 50%;object-fit: cover;padding: 5px;">
+          </button>
+        </div>
+        
+      </div>
+    </div>
+    <div *ngIf="router.url == '/dashboard' || router.url == '/categories' || router.url == '/courses' || router.url == '/profile' || router.url == '/carnet-upload' || router.url == '/approval'">
+      <button mat-icon-button style="width: auto; height: auto;" (click)="logOutUser()">Cerrar Sesión</button>
+    </div>
+    
+  </div>
+  <div *ngIf="isMobile">
+    <div *ngIf='isLogged' style="display: flex;align-items: center;">
+      <div *ngIf="usrImg == ''" >
+        <button mat-icon-button style="width: auto; height: auto;" [matMenuTriggerFor]="menu">
+          <img src="../assets/user-palceholder.png" style="width: 35px; height: 35px;padding: 5px;">
+        </button>
+      </div>
+      <div *ngIf="usrImg != ''" style="display: flex;">
+        <button mat-icon-button tyle="width: 50px; height: 50px;" [matMenuTriggerFor]="menu">
+          <img [src]="usrImg" style="width: 40px; height: 40px; border-radius: 50%;object-fit: cover;padding: 5px;">
+        </button>
+      </div>
+      
+    </div>
+  </div>
+  
+  
+</mat-toolbar>
+<router-outlet></router-outlet>
+<mat-menu #menu="matMenu">
+  <div *ngIf="isLogged && User.role == 'admin'">
+    <button mat-menu-item routerLink='approval'>Ver Solicitudes</button>
+  </div>
+  <!-- <div *ngIf="isLogged && User.role == 'profesor' && User.enabled">
+    <button mat-menu-item routerLink='courses'>Cursos</button>
+  </div> -->
+  <div *ngIf="isLogged && User.role == 'profesor' && User.enabled">
+    <button mat-menu-item routerLink='dashboard'>Dashboard</button>
+  </div>
+  <button mat-menu-item routerLink='profile'>Mi Cuenta</button>
+  <button mat-menu-item (click)="logOutUser()">Cerrar Sesión</button>
+</mat-menu>
+
+

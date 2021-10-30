@@ -1,0 +1,21 @@
+<div>
+    <span style="font-weight: bold;font-size: 20px;margin-bottom: 10px;">{{QuizName}}</span>
+    <div *ngFor="let question of quiz; let i = index"
+        style="border: 1px solid;border-radius: 10px;padding: 5px;margin-bottom: 5px;">
+        <span style="text-decoration: underline;">{{ question.pregunta }}</span>
+        <div style="margin-left: 15px;">
+            <div>
+                <input type='radio' value="1" [checked]="1 === +question.correcta"><span>{{ question['1'] }}</span>
+            </div>
+            <div>
+                <input type='radio' value="2" [checked]="2 === +question.correcta"><span>{{ question['2'] }}</span>
+            </div>
+            <div>
+                <input type='radio' value="3" [checked]="3 === +question.correcta"><span>{{ question['3'] }}</span>
+            </div>
+            <div>
+                <input type='radio' value="4" [checked]="4 === +question.correcta"><span>{{ question['4'] }}</span>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,188 @@
+<ion-content  class="background">
+    <ng-container *ngIf="promo">
+    <div class=part1>
+        <ion-slides #slidePromo class="menuSlide" pager="true" [options]="slideOpts" >
+            <ion-slide>
+                <div>
+                    <ion-img src="../assets/1.png" class="imagenes" alt=""></ion-img>
+                </div>
+            </ion-slide>
+            <ion-slide class="vamos">
+                <div class="parte2">
+                    <div>
+                        <ion-img src="../assets/2.png" class="imagenes" alt=""></ion-img>
+                    </div>
+                    <div>
+
+                    </div>
+                </div>
+            </ion-slide>
+            <ion-slide class="vamos">
+                <div>
+
+                    <ion-img src="../assets/3.png" class="imagenes" alt=""></ion-img>
+
+
+                </div>
+            </ion-slide>
+        </ion-slides>
+    </div>
+    <div class="part3">
+        <ion-button class="tamanio" (click)="cambiar()" expand="full">
+            <ion-icon name="arrow-redo-outline"></ion-icon>Ingresar</ion-button>
+    </div>
+    </ng-container>
+
+    <ng-container *ngIf="!promo">
+        <ion-slides #slidePrincipal>
+            <ion-slide>
+                <form (ngSubmit)="login( f )" #f="ngForm" style="margin-top: 40px;">
+                    <ion-grid fixed>
+                        <ion-row>
+                            <ion-col>
+                                <img src="../../assets/Logo (2).png">
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col style="width: 90vw;">
+                                <ion-list>
+                                    <ion-label color="danger" *ngIf="error">Contraseña o correo incorrecto</ion-label>
+                                    <ion-label *ngIf="noExist" color="danger">Correo o contraseña incorrectos</ion-label>
+
+                                    <ion-item>
+                                        <ion-label position="floating">Correo institucional</ion-label>
+                                        <ion-input matInput type="email" placeholder="Ingrese su correo" name="email" [(ngModel)]="usuariolog.email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" #email="ngModel"></ion-input>
+                                        <!-- <mat-error class="text-danger" *ngIf="email.invalid && email.touched">Correo no válido</mat-error> -->
+                                    </ion-item>
+                                    <ion-item appearance="legacy" class="tamanioc">
+                                        <ion-label position="floating">Contraseña</ion-label>
+                                        <ion-input matInput [type]="hide ? 'password' : 'text'" name="password" [(ngModel)]="usuariolog.password" #password="ngModel" required>
+                                            <button item-right mat-icon-button matSuffix (click)="hide= !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" style="position: absolute;right: 0;">
+                                                <ion-icon  [name]="hide ?'eye-off':'eye'"></ion-icon>        
+                                            </button>
+                                        </ion-input>
+                                        <!-- <mat-error class="text-danger" *ngIf="password.invalid && password.touched">Contraseña requerida</mat-error> -->
+                                    </ion-item>                                   
+                                    <mat-error *ngIf="password.invalid && password.touched">Contraseña requerida</mat-error>
+                                </ion-list>
+                                <div style="margin-top: 20px;margin-bottom: 15px;text-align: left;">
+                                    <ion-label (click)="recuperarPass()">¿Olvidó su contraseña?</ion-label>
+                                </div>                                
+                            </ion-col>
+                        </ion-row>
+
+                        <!-- <p class="ion-text-end texto">
+                            <a routerLink='/forgot-password'>Olvidaste tu contraseña?</a>
+                        </p> -->
+
+                        <ion-row>
+                            <ion-col>
+                                <ion-button type="submit" shape="round" expand="full">
+                                    Iniciar Sesión
+                                </ion-button>
+                            </ion-col>
+                        </ion-row>
+        
+                        <ion-col *ngIf="!pasar">
+                            <ion-button shape="round" expand="full" fill="solid" color="tertiary" (click)="mostrarRegistro()">
+                                Crear Cuenta
+                            </ion-button>
+                        </ion-col>
+
+
+                    </ion-grid>
+                </form>
+            </ion-slide>
+            <ion-slide>
+                <ion-grid fixed>
+                    <ion-row>
+                        <ion-col>
+                            <ion-label color="primary">Registro</ion-label>
+                        </ion-col>
+                    </ion-row>
+                    <mat-error *ngIf="usuarioexite">Esta cuenta ya esta registrada </mat-error>
+                    <form [formGroup]="forma" (ngSubmit)="createUser(forma)" #formone="ngForm" style="margin-top: 48px;">
+                        <ion-row>
+                            <ion-col>
+                                <ion-list>
+                                    <ion-item>
+                                        <ion-label position="floating">Correo Institucional</ion-label>
+                                        <ion-input [(ngModel)]="usuario.email" formControlName="email" required></ion-input>
+                                    </ion-item>
+                                    <mat-error *ngIf="forma.controls['email'].errors?.pattern"> {{errors.emailmal}}</mat-error>
+
+                                    <ion-item>
+                                        <ion-label position="floating">Nombre</ion-label>
+                                        <ion-input [(ngModel)]="usuario.nombre" formControlName="nombre" type="text" required></ion-input>
+                                    </ion-item>
+                                    <mat-error *ngIf="forma.controls['nombre'].errors?.pattern"> {{errors.name}}</mat-error>
+
+                                    <ion-item>
+                                        <ion-label position="floating">Apellido</ion-label>
+                                        <ion-input [(ngModel)]="usuario.apellido" formControlName="apellido" type="text" required></ion-input>
+                                    </ion-item>
+                                    <mat-error *ngIf="forma.controls['apellido'].errors?.pattern"> {{errors.apellido}}</mat-error>
+
+                                    <!--   <ion-item>
+                                        <ion-label position="floating">Fecha nacimiento</ion-label>
+                                        <ion-datetime [(ngModel)]="usuario.fechanacimiento" formControlName="fechanacimiento" required displayFormat="D MMM YYYY " min="1980" value="2005-06-17T11:06Z"></ion-datetime>
+                                    </ion-item> -->
+                                    <!-- <ion-item>
+
+                                        <mat-form-field appearance="legacy" class="contorno">
+                                            <mat-label class="colores">Fecha nacimiento</mat-label>
+                                            <input matInput [matDatepicker]="picker" [(ngModel)]="usuario.fechanacimiento" formControlName="fechanacimiento" required>
+                                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                            <mat-datepicker #picker></mat-datepicker>
+                                            <mat-error *ngIf="forma.controls['fechanacimiento'].errors?.required">
+                                                La fecha de nacimiento es requerida
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </ion-item> 
+                                    <ion-item>
+                                        <ion-label position="floating">Rol</ion-label>
+                                        <ion-select [(ngModel)]="usuario.rol" formControlName="rol" required okText="Ok">
+                                            <ion-select-option value="estudiante">Estudiante</ion-select-option>
+
+                                        </ion-select>
+                                    </ion-item>
+                                    
+                                    <ion-item>
+                                        <ion-label position="floating">Tecnología Superior</ion-label>
+                                        <ion-select [(ngModel)]="usuario.carrera" formControlName="carrera" required cancelText="Cancelar" okText="Ok">
+                                            <ion-select-option value="tsds">Desarrollo de Sofwate</ion-select-option>
+                                            <ion-select-option value="tsasa">Aguas y Saneamiento Ambiental</ion-select-option>
+                                            <ion-select-option value="tsem">Electromecánica</ion-select-option>
+                                            <ion-select-option value="tset">Electrónica y Telecomunicaciones</ion-select-option>
+                                        </ion-select>
+                                    </ion-item>-->
+                                    <ion-item>
+                                        <ion-label position="floating">Contraseña</ion-label>
+                                        <ion-input [type]="hide ? 'password' : 'text'" [(ngModel)]="usuario.password" formControlName="password" required>
+                                            <button item-right mat-icon-button matSuffix (click)="hide= !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" style="position: absolute;right: 0;">
+                                                <ion-icon  [name]="hide ?'eye-off':'eye'"></ion-icon>        
+                                            </button>
+                                        </ion-input>
+                                    </ion-item>
+                                    <mat-error *ngIf="forma.controls['password'].errors?.pattern">Mínimo 8 caracteres incluyendo al menos una mayúscula una minúscula y un número </mat-error>
+                                </ion-list>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col>
+                                <ion-button color="primary" shape="round" expand="full" (click)="formone.ngSubmit.emit()">
+                                    Crear usuario
+                                </ion-button>
+                            </ion-col>
+                        </ion-row>
+                    </form>
+                    <ion-col *ngIf="pasar">
+                        <ion-button shape="round" expand="full" fill="solid" color="tertiary" (click)="mostrarLogin()">
+                            Iniciar Sesión
+                        </ion-button>
+                    </ion-col>
+                </ion-grid>
+            </ion-slide>
+        </ion-slides>
+    </ng-container>
+</ion-content>

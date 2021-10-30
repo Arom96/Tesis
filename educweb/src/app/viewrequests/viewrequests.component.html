@@ -1,0 +1,116 @@
+<div style="display: flex;flex-direction: row;height: 90vh;">
+    <div style="height: auto;min-height: 91vh;background: black;">
+        <div style="color: white;margin: 10px;font-weight: bold;font-size: 22px;align-items: center;display: flex;display: flex;width: 230px;">
+            <!-- <mat-icon class="icono" style="color: white;margin: 10px;margin-left: 3px;cursor: pointer;" (click)="navigateWithParams()">arrow_back_ios_new</mat-icon> -->
+            <div style="display: flex;flex-direction: column;align-items: center;width: 100%;">            
+              <div *ngIf="usrImg == ''" >
+                  <button mat-icon-button style="width: auto; height: auto;" [matMenuTriggerFor]="menu">
+                    <img src="../assets/user-palceholder.png" style="width: 35px; height: 35px;padding: 5px;">
+                  </button>
+                </div>
+                <div *ngIf="usrImg != ''" style="display: flex;">
+                  <button mat-icon-button tyle="width: 50px; height: 50px;" [matMenuTriggerFor]="menu">
+                    <img [src]="usrImg" style="width: 40px; height: 40px; border-radius: 50%;object-fit: cover;padding: 5px;">
+                  </button>
+                </div>
+                <span style="margin-right: 10px;margin-top: 10px;">{{userName}}</span>
+            </div>
+        </div>
+        <mat-divider style="margin-bottom: 5px;margin-top: 5px;background: white;"></mat-divider>
+        <div style="display: flex;flex-direction: column;">
+          <button mat-icon-button routerLink='/profile' style="color: white;"><mat-icon class="icono" style="color: white;margin-right: 10px;margin-left: 10px;">badge</mat-icon>Mi Cuenta</button>
+          <div *ngIf="usrRole != 'admin'">            
+            <button mat-icon-button routerLink='/categories' style="color: white;"><mat-icon class="icono" style="color: white;margin-right: 10px;margin-left: 10px;">dashboard_customize</mat-icon>Categorias</button>
+            <button mat-icon-button routerLink='/courses' style="color: white;"><mat-icon class="icono" style="color: white;margin-right: 10px;margin-left: 10px;">grading</mat-icon>Contenido</button>
+          </div>
+          
+          <div *ngIf="usrRole == 'admin'">
+            <button mat-icon-button routerLink='/approval' style="color: white;font-weight: bold;font-size: 20px;"><mat-icon class="icono" style="color: white;margin-right: 10px;margin-left: 10px;">grading</mat-icon>Ver Peticiones</button>
+          </div>
+        </div>   
+      </div> 
+    
+    <div style="padding: 15px;display: flex;align-items: center;justify-content: center;    width: 100%;flex-direction: column;" *ngIf="reqList.length > 0">
+        <span style="margin-bottom: 20px;font-weight: bold;font-size: 19px;">Solicitud de Profesores</span>
+        <table style="background: white;width: 80%;" mat-table [dataSource]="dataSource" class="mat-elevation-z8">    
+            <!-- name Column -->
+            <ng-container matColumnDef="name" >
+                <th mat-header-cell *matHeaderCellDef style="color: grey;font-size: 14px;"> Nombre </th>
+                <td mat-cell *matCellDef="let reqList" style="color: grey; font-size: 12px;"> {{reqList.name}} {{reqList.lastname}} </td>
+            </ng-container>
+            
+            <!-- mail Column -->
+            <ng-container matColumnDef="mail">
+                <th mat-header-cell *matHeaderCellDef style="color: grey;font-size: 14px;"> Correo </th>
+                <td mat-cell *matCellDef="let reqList" style="color: grey; font-size: 12px;"> {{reqList.mail}} </td>
+            </ng-container>
+            
+            <!-- type Column -->
+            <ng-container matColumnDef="type">
+                <th mat-header-cell *matHeaderCellDef style="color: grey;font-size: 14px;"> Tipo </th>
+                <td mat-cell *matCellDef="let reqList" style="color: grey; font-size: 12px;"> {{reqList.role}} </td>
+            </ng-container>
+    
+            <!-- type Column -->
+            <ng-container matColumnDef="carnet">
+                <th mat-header-cell *matHeaderCellDef style="color: grey;font-size: 14px;"> Carnet </th>
+                <td mat-cell *matCellDef="let reqList" style="color: grey; font-size: 12px;"> 
+                    <button (click)="goToLink(reqList.carnetUrl)">Ver</button>                
+                </td>
+            </ng-container>
+        
+            <!-- action Column -->
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef style="color: grey;font-size: 14px;"> Aprobar </th>
+                <td mat-cell *matCellDef="let reqList" style="color: grey; font-size: 12px;"> 
+                    <button mat-button (click)="AcceptRequests(reqList)" style="background-color: chartreuse;">
+                        ACEPTAR <mat-icon>done</mat-icon>
+                    </button> 
+                </td>
+            </ng-container>
+
+            <!-- action Column -->
+            <ng-container matColumnDef="action2">
+                <th mat-header-cell *matHeaderCellDef style="color: grey;font-size: 14px;"> Alertar </th>
+                <td mat-cell *matCellDef="let reqList" style="color: grey; font-size: 12px;"> 
+                    <button mat-button (click)="AlertRequests(reqList)" style="background-color: #b87333;color: white;">
+                        ALERTAR <mat-icon>report_problem</mat-icon>
+                    </button> 
+                </td>
+            </ng-container>
+
+             <!-- action Column -->
+             <ng-container matColumnDef="action3">
+                <th mat-header-cell *matHeaderCellDef style="color: grey;font-size: 14px;"> Eliminar </th>
+                <td mat-cell *matCellDef="let reqList" style="color: grey; font-size: 12px;"> 
+                    <button mat-button (click)="DenyRequests(reqList)" style="background-color: #A00000;color: white;">
+                        ELIMINAR USUARIO <mat-icon>cancel</mat-icon>
+                    </button> 
+                </td>
+                
+            </ng-container>
+            
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let reqList; columns: displayedColumns;"></tr>
+            
+        </table>      
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" style="width: 80%;position: absolute;bottom: 0px;"></mat-paginator>
+        
+    </div>
+    <div style="padding: 15px;display: flex;align-content: center;align-items: center;justify-content: center;flex-direction: column;" *ngIf="reqList.length < 1"> 
+        <div style="display: flex;height: 30vh;"></div>
+        <span style="border-radius: 15px;border: 2px solid;padding: 30px;opacity: 55%;background: lightskyblue;">
+            No hay peticiones en espera
+        </span>    
+        <div _ngcontent-uxv-c153="" style="display: flex; height: 30vh;"></div>
+    </div>
+</div>
+
+
+
+<mat-menu #menu="matMenu">
+    <!-- <div *ngIf="isLogged && User.role == 'profesor' && User.enabled">
+      <button mat-menu-item routerLink='courses'>Cursos</button>
+    </div> -->
+    <button mat-menu-item (click)="logOutUser()">Cerrar Sesión</button>
+</mat-menu>

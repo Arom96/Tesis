@@ -1,0 +1,119 @@
+<div style="display: flex;flex-direction: row;">
+    <div style="height: auto;min-height: 91vh;background: black;">
+        <div style="color: white;margin: 10px;font-weight: bold;font-size: 22px;align-items: center;display: flex;display: flex;width: 230px;">
+            <mat-icon class="icono" style="color: white;margin: 10px;margin-left: 3px;cursor: pointer;" (click)="navigateWithParams()">arrow_back_ios_new</mat-icon>
+            <div style="display: flex;flex-direction: column;align-items: center;width: 100%;">            
+              <div *ngIf="usrImg == ''" >
+                  <button mat-icon-button style="width: auto; height: auto;" [matMenuTriggerFor]="menu">
+                    <img src="../assets/user-palceholder.png" style="width: 35px; height: 35px;padding: 5px;">
+                  </button>
+                </div>
+                <div *ngIf="usrImg != ''" style="display: flex;">
+                  <button mat-icon-button tyle="width: 50px; height: 50px;" [matMenuTriggerFor]="menu">
+                    <img [src]="usrImg" style="width: 40px; height: 40px; border-radius: 50%;object-fit: cover;padding: 5px;">
+                  </button>
+                </div>
+                <span style="margin-right: 10px;">{{userName}}</span>
+              </div>
+        </div>
+        <mat-divider style="margin-bottom: 5px;margin-top: 5px;background: white;"></mat-divider>
+        <div style="display: flex;flex-direction: column;">
+          <button mat-icon-button routerLink='/profile' style="color: white;"><mat-icon class="icono" style="color: white;margin-right: 10px;margin-left: 10px;">badge</mat-icon>Mi Cuenta</button>
+          <button mat-icon-button routerLink='/categories' style="color: white;"><mat-icon class="icono" style="color: white;margin-right: 10px;margin-left: 10px;">dashboard_customize</mat-icon>Categorías</button>
+          <button mat-icon-button routerLink='/courses' style="color: white;"><mat-icon class="icono" style="color: white;margin-right: 10px;margin-left: 10px;">grading</mat-icon>Contenido</button>
+        </div>        
+        <!-- No mostremos esto -->
+        <div style="display: none;">
+          <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" style="width: 250px;height: 100%;background: black;color: white;">
+            <!-- This is the tree node template for leaf nodes -->
+            <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding style="color: white;">
+              <!-- use a disabled button to provide padding for tree leaf -->
+              <button mat-icon-button disabled></button>
+              <button mat-icon-button (click)="showData(node.name)">{{node.name}}</button>
+            </mat-tree-node>
+            <!-- This is the tree node template for expandable nodes -->
+            <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding style="color: white;">
+              <button mat-icon-button matTreeNodeToggle
+                      [attr.aria-label]="'Toggle ' + node.name" (click)="showSelected(node.name)"> 
+                <mat-icon class="mat-icon-rtl-mirror">
+                  {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                </mat-icon>
+              </button>
+              {{node.name}}
+              <div style="display: flex;margin-left: 10px;background: #49693c;padding: 5px;border-radius: 50%;justify-content: center;font-size: 11px;">
+                  <span>{{node.number}}</span>
+              </div>
+              <button mat-icon-button (click)="openCreateTema()">
+                <mat-icon>add</mat-icon>
+              </button>
+            </mat-tree-node>
+        </mat-tree>
+        </div>
+        
+    </div>
+    <div *ngIf="selectedTema != undefined" style="width: 100%;">
+        <div style="display: flex;
+        justify-content: center;">
+            <span style="font-weight: bold;font-size: 21px;border: 3px solid #001f3e;border-radius: 12px;padding: 10px;margin-top: 5px;">{{tema.name}} / {{selectedTema.nombre}}</span>
+        </div>        
+        <!-- Acordion con Lecturas -->
+        <div style="margin-top: 5px;">
+            <mat-accordion style="margin-top: 5px;">
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                   <mat-panel-title>Lecturas</mat-panel-title>
+                </mat-expansion-panel-header>
+                <ul style="text-align: left;">
+                  <div *ngFor="let task of selectedTema.lecturas; let i = index">
+                    <li>{{ task.nombre }} <button mat-button style="margin-left: 10px;margin: 7px;border: 2px solid #FCB823;border-radius: 11px;" (click)="goToLink(task.doc)">ver</button> 
+                          <button mat-button (click)="deleteLectura(task, selectedTema)">Eliminar</button>   
+                          <button mat-button (click)="OpenEditLectura(task, selectedTema.nombre, i)">Editar</button>                          
+                    </li>
+                  </div>
+                </ul>
+                <mat-action-row>
+                  <button mat-button (click)="openCreateLectura(selectedTema.nombre)">Nueva Lectura</button>
+                  <div style="flex: 1 0 auto;"></div>                        
+                </mat-action-row>
+              </mat-expansion-panel>
+              
+          
+            </mat-accordion>
+            
+        </div>
+        <!-- Acordion con documentos -->
+        <div style="margin-top: 5px;">
+        <mat-accordion style="margin-top: 5px;">
+            <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>Prueba</mat-panel-title>
+            </mat-expansion-panel-header>
+            <ul style="text-align: left;">
+                <div *ngFor="let task of selectedTema.pruebas">
+                <li>{{ task.name }} <button mat-button style="margin-left: 10px;margin: 7px;border: 2px solid #FCB823;border-radius: 11px;" (click)="openViewPrueba(task)">ver</button>
+                    <button mat-button (click)="deletePrueba(task, selectedTema)">Eliminar</button>
+                </li>
+                </div>
+            </ul>
+            <mat-action-row>
+                <button mat-button (click)="openCreatePrueba(selectedTema.nombre)">Nueva Prueba</button>
+                <div style="flex: 1 0 auto;"></div>                        
+            </mat-action-row>
+            </mat-expansion-panel>          
+            
+        </mat-accordion>
+        
+        </div> 
+    </div>   
+    <div *ngIf="selectedTema == undefined" style="display: flex;flex-direction: column;align-items: center;width: 80%;padding: 15px;height: 150px;border: 2px solid;margin: 5px;border-radius: 15px;justify-content: center;">
+        <div>
+            <span>Seleccione algun Tema</span>
+        </div>        
+    </div>
+</div>
+
+
+<mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink='/profile'>Mi Cuenta</button>
+    <button mat-menu-item (click)="logOutUser()">Cerrar Sesión</button>
+  </mat-menu>

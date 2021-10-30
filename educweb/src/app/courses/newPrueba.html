@@ -1,0 +1,142 @@
+<div *ngIf="process == 'new'">
+  <div style="max-height: 90vh; overflow: auto;">
+    <span>Crear Prueba</span>
+    <div>
+      <!-- <span>Nombre:</span>
+      <input id="name"> -->
+      <mat-form-field appearance="fill">
+        <mat-label>Nombre</mat-label>
+        <input matInput id="name">
+      </mat-form-field>
+    </div>
+    <mat-divider style="margin-top: 5px; margin-bottom: 5px;"></mat-divider>
+    <div *ngFor="let seccion of quiz.questions; let i = index" style="display: flex;flex-direction: column;">
+      <mat-form-field appearance="fill">
+        <mat-label>Pregunta:</mat-label>
+        <input matInput [id]="i+'ask'">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Opcion1:</mat-label>
+        <input matInput [id]="i+'1'">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Opcion2:</mat-label>
+        <input matInput [id]="i+'2'">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Opcion3:</mat-label>
+        <input matInput [id]="i+'3'">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Opcion4:</mat-label>
+        <input matInput [id]="i+'4'">
+      </mat-form-field>
+      <select [id]="i+'correcta'">
+        <option value="1">Opcion 1</option>
+        <option value="2">Opcion 2</option>
+        <option value="3">Opcion 3</option>
+        <option value="4">Opcion 4</option>
+      </select>
+      <!-- <span>Pregunta:</span>
+      <input [id]="i+'ask'">
+      <span>Opcion1:</span>
+      <input [id]="i+'1'">
+      <span>Opcion2:</span>
+      <input [id]="i+'2'">
+      <span>Opcion3:</span>
+      <input [id]="i+'3'">
+      <span>Opcion4:</span>
+      <input [id]="i+'4'">
+      <span>Respuesta Correcta:</span>
+      <select [id]="i+'correcta'">
+          <option value="1" selected>Opcion 1</option>
+          <option value="2">Opcion 2</option>
+          <option value="3">Opcion 3</option>        
+          <option value="4">Opcion 4</option>
+      </select> -->
+      <mat-divider style="margin-top: 15px;margin-bottom: 15px;"></mat-divider>
+    </div>
+    <div style="display: flex;">
+      <button mat-raised-button color="primary" style="margin-top: 30px;" (click)="agregarPregunta()">
+        Agregar Pregunta
+      </button>
+      <div style="flex:1 0 auto"></div>
+      <button mat-raised-button color="primary" style="margin-top: 30px;" (click)="guardarPrueba()">
+        Guardar Prueba
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<!-- EDIT PRUEBA -->
+<div *ngIf="process == 'edit'">
+  <div style="max-height: 90vh; overflow: auto;">
+    <span>Editar Prueba</span>
+    <div>
+      <!-- <span>Nombre:</span>
+      <input id="name"> -->
+      <mat-form-field appearance="fill">
+        <mat-label>Nombre</mat-label>
+        <input matInput maxlength="50" id="name">
+      </mat-form-field>
+    </div>
+    <mat-divider style="margin-top: 5px; margin-bottom: 5px;"></mat-divider>
+    <div *ngFor="let seccion of quiz.questions; let i = index" style="display: flex;flex-direction: column;">
+      <mat-form-field appearance="fill">
+        <mat-label>Pregunta:</mat-label>
+        <input matInput maxlength="150" [id]="i+'ask'">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Opcion1:</mat-label>
+        <input matInput maxlength="100" [id]="i+'1'">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Opcion2:</mat-label>
+        <input matInput maxlength="100" [id]="i+'2'">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Opcion3:</mat-label>
+        <input matInput maxlength="100" [id]="i+'3'">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Opcion4:</mat-label>
+        <input matInput maxlength="100" [id]="i+'4'">
+      </mat-form-field>
+      <mat-label>Respuesta Correcta:</mat-label>
+      <select [id]="i+'correcta'">
+        <option value="1">Opcion 1</option>
+        <option value="2">Opcion 2</option>
+        <option value="3">Opcion 3</option>
+        <option value="4">Opcion 4</option>
+      </select>
+      <!-- <span>Pregunta:</span>
+      <input [id]="i+'ask'">
+      <span>Opcion1:</span>
+      <input [id]="i+'1'">
+      <span>Opcion2:</span>
+      <input [id]="i+'2'">
+      <span>Opcion3:</span>
+      <input [id]="i+'3'">
+      <span>Opcion4:</span>
+      <input [id]="i+'4'">
+      <span>Respuesta Correcta:</span>
+       <mat-select [id]="i+'correcta'">
+          <mat-option value="1">Opcion 1</mat-option>
+          <mat-option value="2">Opcion 2</mat-option>
+          <mat-option value="3">Opcion 3</mat-option>
+          <mat-option value="4">Opcion 4</mat-option>
+        </mat-select>-->
+      <mat-divider style="margin-top: 15px;margin-bottom: 15px;"></mat-divider>
+    </div>
+    <div style="display: flex;">
+      <button mat-raised-button color="primary" style="margin-top: 30px;" (click)="agregarPregunta()">
+        Agregar Pregunta
+      </button>
+      <div style="flex:1 0 auto"></div>
+      <button mat-raised-button color="primary" style="margin-top: 30px;" (click)="guardarPrueba()">
+        Guardar Prueba
+      </button>
+    </div>
+  </div>
+</div>

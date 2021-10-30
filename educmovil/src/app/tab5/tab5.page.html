@@ -1,0 +1,98 @@
+<ion-content class="background">
+  <div style="position: fixed;margin-top: 80px;z-index: 999;">
+    <button ion-button large style="background: transparent;width: 40px;height: 40px;" (click)="goback()">
+      <ion-icon style="font-size: 30px;" name="arrow-back-outline"></ion-icon>
+    </button>
+  </div>
+  <div style="margin-top: 40px;">
+    <ion-item>
+      <ion-label>Nivel de Lecturas</ion-label>
+      <ion-select id="filtro" value="all" okText="Aplicar" cancelText="Cancelar" (ionChange)="filter()">
+        <ion-select-option value="all">Todas</ion-select-option>
+        <ion-select-option value="basic">Básico</ion-select-option>
+        <ion-select-option value="inter">Intermedio</ion-select-option>
+        <ion-select-option value="adv">Avanzado</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </div>
+  <div *ngIf="lecturas != []">
+    <ion-grid style="margin-top: 10px;">
+      <ion-row>
+        <ion-col class='cardRestaurant' *ngFor="let cat of lecturas; let i = index"  style="margin-top: 10px;">
+          <ion-card style="min-height: auto;min-width: 120px;margin: 2px;">
+            <ion-card-content>
+              <ion-card-title style="text-align: center;">
+                <div style="display: flex;justify-content: space-between;">
+                  <div>
+                    <span class="textCardRestaurant">{{ cat.nombre }}</span>
+                  </div>
+                  <div style="font-size: 12px;align-self: center;padding-bottom: 3px;">
+                    <span style="color: royalblue;">Nivel: <strong>{{ cat.level }}</strong></span>
+                  </div>
+                </div>
+              </ion-card-title>
+              <hr style="background: white;">
+              <div>
+              </div>
+              <div>
+                <p style="margin-top: 5px;padding: 5px;border: 2px solid #2e2f2f;border-radius: 10px;margin-bottom: 7px;">
+                  {{ cat.desc }}
+                </p>
+              </div>
+              <div>
+                <ion-slides class="menuSlide" pager="true" [options]="slideOpts" >
+                  <ion-slide *ngFor="let pic of cat.images">
+                        <div>
+                            <ion-img [src]="pic" class="imagenes" alt=""></ion-img>
+                        </div>
+                    </ion-slide>
+                </ion-slides>
+              </div>
+              <div>
+                <ion-button shape="round" expand="full" fill="solid" color="tertiary" (click)="openDoc(cat.doc)">
+                  Ver Documento
+                </ion-button>
+                <ion-button shape="round" expand="full" fill="solid" color="tertiary" (click)="openDoc(cat.url_youtube)">
+                  Ver Video
+                </ion-button>
+              </div>
+            </ion-card-content>
+          </ion-card>
+          <br>
+
+
+          <ion-card style="min-height: auto;min-width: 120px;margin: 2px;">
+            <ion-card-content>
+              <ion-card-title style="text-align: center;">            
+              <p style="text-align: center;font-size: 22px;color: black;margin-bottom: 10px;">Prueba tus conocimientos</p>
+              <hr style="background: white;margin: 20px;">
+              <div *ngIf="pruebas != []">
+                <div *ngFor="let test of pruebas; let i = index">
+                  <div>
+                    <p style="margin-top: 5px;padding: 5px;border: 2px solid #2e2f2f;border-radius: 10px;margin-bottom: 7px;">{{test.name}}</p>
+                  </div>
+              
+                  <ion-button shape="round" expand="full" fill="solid" color="tertiary" (click)="changeTab(test.name, test.payload)">
+                    Tomar Prueba
+                  </ion-button>
+                </div>
+              </div>
+            </ion-card-title>
+              <div *ngIf="pruebas.length == 0">
+                <div style="margin-top: 10px;display: flex;justify-content: center;align-items: center;">
+                  <span style="color: black;padding: 15px;border: 2px solid royalblue;border-radius: 10px;">No hay pruebas por el momento</span>
+                </div>
+              </div>
+            </ion-card-content>  
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <div *ngIf="lecturas.length == 0 ">
+    <div style="margin-top: 60px;display: flex;justify-content: center;align-items: center;">
+      <span style="color: black;padding: 15px;border: 2px solid royalblue;border-radius: 10px;">No hay lecturas para mostrar por el momento</span>
+    </div>
+  </div>
+  
+</ion-content>

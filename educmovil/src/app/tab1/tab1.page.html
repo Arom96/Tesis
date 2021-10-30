@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Register User</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="background">
+  <div *ngIf="valor">
+      <ion-row class="top-20">
+          <div class="centrado">
+
+              <img src="../../assets/user-palceholder.png" *ngIf="!perfil" class="img-avatar">
+              <img [src]="usuario.usrUrl" *ngIf="perfil" class="img-avatar">
+
+          </div>
+          <div class="centrado">
+              <div>
+                  <ion-button shape="round" color="primary" class="circular" size="default" (click)="menu()">
+                      <ion-icon name="camera-outline"></ion-icon>
+                  </ion-button>
+              </div>
+          </div>
+      </ion-row>
+
+      <ion-row class="top-20">
+          <ion-col size="12" text-center>
+              <ion-label color="primary">
+                  <div class="centrado">
+                      <h1>Actualizar perfil</h1>
+                  </div>
+              </ion-label>
+          </ion-col>
+      </ion-row>
+
+
+      <form [formGroup]="forma" (ngSubmit)="cambio(forma)" #formone="ngForm">
+          <ion-row>
+              <ion-col>
+
+                  <ion-list>
+                      <ion-item>
+                          <ion-label position="floating">Nombre</ion-label>
+                          <ion-input formControlName="nombre" type="text" required maxlength="20"></ion-input>
+                      </ion-item>
+                      <!-- <mat-error *ngIf="forma.controls['nombre'].errors?.pattern">
+                          {{errors.solotexto}}
+                      </mat-error> -->
+                      <ion-item>
+                          <ion-label position="floating">Apellido</ion-label>
+                          <ion-input formControlName="apellido" type="text" required maxlength="20"></ion-input>
+                      </ion-item>
+                      <!-- <mat-error *ngIf="forma.controls['apellido'].errors?.pattern">
+                          {{errors.solotexto}}
+                      </mat-error> -->
+                  </ion-list>
+              </ion-col>
+          </ion-row>
+
+          <ion-row>
+              <div class="centrado" style="flex-direction: column;">
+                  <div>
+                      <ion-button type="submit" color="tertiary" shape="round">
+                          Actualizar
+                      </ion-button>
+                  </div>
+                  <div style="margin-top: 100px;">
+                    <ion-button color="tertiary" shape="round" (click)="logOut()">
+                        Cerrar Sesión
+                    </ion-button>
+                </div>
+              </div>
+          </ion-row>
+
+      </form>
+  </div>
+
+</ion-content>

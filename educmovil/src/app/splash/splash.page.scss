@@ -1,0 +1,118 @@
+.mainSlide,
+.mainSlide ion-slide {
+    width: 100%;
+    height: 100%;
+}
+
+.menuSlide,
+.menuSlide ion-slide {
+    width: 100%;
+    height: 100%;
+    padding: 0%;
+}
+
+.part3 {
+    width: 100%;
+    height: 5%;
+    padding: 0%;
+    margin: 0%;
+    background: rgb(40, 211, 224) !important;
+    background: linear-gradient(63deg, rgba(40, 211, 224, 1) 0%, rgba(69, 82, 168, 1) 59%, rgba(42, 48, 157, 1) 100%)!important;
+}
+
+.part1 {
+    width: 100%;
+    height: 95%;
+    padding: 0%;
+    margin: 0%;
+    background: rgb(40, 211, 224);
+    background: linear-gradient(63deg, rgba(40, 211, 224, 1) 0%, rgba(69, 82, 168, 1) 59%, rgba(42, 48, 157, 1) 100%);
+}
+
+img {
+    width: 175px;
+}
+
+.encima {
+    position: relative;
+    z-index: 6;
+    top: 50px;
+}
+
+.vamos {
+    height: 100%;
+    width: 100%;
+}
+
+.parte2 {
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.pick-avatar {
+    width: 80px;
+    opacity: 0.3;
+}
+
+.pick-avatar-seleccionado {
+    transition: opacity 0.5s linear;
+    opacity: 1 !important;
+}
+
+.google {
+    --background: #DB4437;
+}
+
+.contenido {
+    padding: 0;
+    margin: 0;
+    background: rgb(40, 211, 224);
+    background: linear-gradient(63deg, rgba(40, 211, 224, 1) 0%, rgba(69, 82, 168, 1) 59%, rgba(42, 48, 157, 1) 100%);
+}
+
+.texto {
+    font-size: 11px;
+    margin-bottom: 0;
+    ;
+}
+
+mat-error {
+    font-size: 11px;
+}
+
+.imagenregistrar {
+    width: 100px;
+    height: 100px;
+}
+
+.imagenes {
+    width: 100%;
+    height: 100%;
+}
+
+.mainContent {
+    width: 100vw;
+    height: 100vh;
+}
+
+.tamanioc {
+    width: 100%;
+}
+
+.tamanio {
+    margin: 0;
+    padding: 0;
+}
+
+.contorno {
+    margin-top: 10px;
+    width: 100%;
+}
+
+.colores {
+    color: black;
+}
+
+ion-content.background{
+    --background: url(../../assets/Bacground.png) 0 0/100% 100% no-repeat;
+}

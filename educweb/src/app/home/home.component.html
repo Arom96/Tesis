@@ -1,0 +1,213 @@
+<div style="display: none;">
+    <div style="background-image: url(../../assets/background.jpg);background-repeat: repeat;background-attachment: fixed;">
+        <div style="display: flex;flex-direction: column;font-family: 'Roboto';margin: 10px;margin-top: 0px;">
+            <div style="position: relative;text-align: center;">
+                <img src="../../assets/client-bg.jpg" style="object-fit: cover;width: 100%;height: 270px;">
+                <div style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);width: 100%;">
+                    <div style="border: 2px solid;border-radius: 15px;margin: 19%;height: 60px;vertical-align: middle;display: flex;align-content: center;align-items: center;justify-content: center;background: black;opacity: 90%;">
+                        <span style="color: white;">
+                            APRENDE SOBRE ARQUITECTURA DE COMPUTADORES!
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!-- <span style="font-size: 25px;font-weight: bold;">
+                Bienvenidos a los cursos de Aquitectura de Computadoras
+            </span>
+            <span style="font-size: 23px;font-weight: bold;margin-bottom: 20px;">
+                Escuela Politecnica Nacional
+            </span> -->
+        </div>
+        <mat-card style="margin: 10px;">
+            <div style="padding: 10px;border-radius: 10px;margin: 5px;">
+                <div style="display: flex;margin-bottom: 20px;flex-direction: column;">
+                    <span style="font-size: 25px;font-weight: bold;">Categorias</span>
+                    <span style="font-size: 14px;">Estas son los categorías disponibles al momento.</span>
+                </div>   
+                <div class="coursesContainer" style="border-left: 10px dashed cornflowerblue;border-right: 10px dashed cornflowerblue;">
+                    <div *ngFor="let categoria of categorias">
+                        <div class="courseTile" (click)="navigateWithParams(categoria.id)">
+                            <mat-card>
+                                <div class="courseDetails">
+                                    <div style="color: #ff4411;
+                                    font-size: 28px;
+                                    font-family: 'Raleway',sans-serif;
+                                    text-transform: uppercase;
+                                    word-break: break-word;font-weight: bold;min-height: 64px;display: flex;align-items: center;justify-content: center;">
+                                        <span>{{ categoria.name }}</span>   
+                                    </div>              
+                                </div>
+                                <div class="coursePreview">
+                                    <img [src]="categoria.cover" style="width: 220px;height: 150px;">
+                                </div>
+                                <div class="courseDetails" style="border: 2px solid red;padding: 5px;min-height: 90px;border-radius: 10px;min-width: 200px;margin-left: 2px;">
+                                    <div style="font-size: 16px;">
+                                        <span>{{ categoria.desc }}</span>   
+                                    </div>              
+                                </div>
+                            </mat-card>
+                            
+                        </div>
+                    </div>
+                    <!-- <div class="courseTile">
+                        <div class="coursePreview">
+                            <img src="../../assets/python_course.jpg" >
+                        </div>
+                        <div class="courseDetails">
+                            <div style="font-size: 16px;">
+                                <span>Curso intensivo Python 3.x. Incluye practicas.</span>   
+                            </div>
+                            <div style="font-size: 13px;color: grey;">
+                                <span>Carlos Inciarte</span>   
+                            </div>                
+                        </div>
+                    </div> -->
+                </div> 
+                
+            </div>
+        </mat-card>
+        <div style="border: 2px solid;padding: 10px;border-radius: 10px;margin: 5px;font-size: 18px;font-weight: bold;text-align-last: center;color: #ff4411;">
+            <span>ESTE ES UN DESARROLLO DE UNA APLICACIÓN WEB EDUCATIVA ORIENTADA AL APRENDIZAJE DE ARQUITECTURA DE COMPUTADORES DE LA ESCUELA DE FORMACIÓN DE TECNÓLOGOS (ESFOT)</span>
+        </div>
+        
+        <div style="display: flex;justify-content: space-evenly;width: 100%;align-items: center;color: #ff4411;">
+            <div style="border: 2px solid;padding: 10px;border-radius: 10px;margin: 5px;font-size: 18px;font-weight: bold;text-align-last: center;width: 50%;">
+                <span>PUEDES DESCARGAR LA APLICACIÓN MÓVIL EN LA PLAY STORE</span>
+            </div>
+            <div style="display: flex;width: 45%;justify-content: center;">
+                <img src="../../assets/play_store.png" style="width: 60%;display: flex;justify-content: center;align-items: center;">
+            </div>
+        </div>
+    </div>
+    <footer style="position: relative;bottom: 0;width: 100%;background: #001f3e">
+        <div style="width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        background: #001f3e;
+        justify-content: space-between;">
+            <div style="background: #001f3e;
+            height: 150px;border-right: 10px dashed;border-color: white;width: 60%;">
+                <div style="display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                margin-left: 10px;
+                margin-top: 15px;">
+                    <span style="font-size: 24px;
+                    font-weight: bold;
+                    color: white;
+                    text-decoration: underline;">Servicio EDUCWEB</span>
+                    <span style="font-size: 16px;
+                    font-weight: bold;
+                    color: white;">Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de diseño para probar el diseño visual antes de insertar el texto final.</span>
+                </div>
+            </div>
+            <div style="background: #001f3e;
+            height: 150px;    width: 55%;">
+                    <div style="display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    margin-left: 10px;
+                    margin-top: 15px;width: 50%;">
+                        <span style="font-size: 24px;
+                        font-weight: bold;
+                        color: white;
+                        text-decoration: underline;">Correos <mat-icon aria-hidden="false" aria-label="Example home icon">email</mat-icon></span>
+                        <span style="font-size: 16px;
+                        font-weight: bold;
+                        color: white;">Alejandro@epn.edu.ec</span>
+                    </div>
+                    <div style="display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    margin-left: 10px;
+                    margin-top: 15px;width: 50%;">
+                        <span style="font-size: 24px;
+                        font-weight: bold;
+                        color: white;
+                        text-decoration: underline;">Direccion <mat-icon aria-hidden="false" aria-label="Example home icon">location_on</mat-icon></span>
+                        <span style="font-size: 16px;
+                        font-weight: bold;
+                        color: white;">Quito, Pichincha<br>
+    Av. Ladrón de Guevara 253, Quito 170517</span>
+                    </div>
+            </div>
+        </div>
+        <div style="padding: 20px;font-size: 18px;font-weight: bold;text-align-last: center;background: #001f3e;color: white;margin-top: 10px;">
+            <span>Todos los derechos reservados CopyRight© 2021</span>
+        </div>
+    </footer>
+</div>
+
+<section id="intro-section" class="home-intro-section">
+    <div class="container" fxLayout="row" fxLayout.lt-md="column" fxLayoutWrap="nowrap" fxLayoutGap="30px">
+        <img src="../../assets/indice2.png" style="width: 100%"> 
+    </div>    
+</section>
+  
+<section id="service-section" class="home-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>El contenido está unicamente disponible en la aplicación móvil…</h2>
+        <p>Puedes ver algunas de nuestras categorías...
+        </p>
+      </div>
+      <div fxLayout="row" fxLayout.lt-md="column" fxLayoutWrap="nowrap" fxLayoutGap="20px" style="display: flex;flex-direction: row;flex-wrap: wrap;gap: 10px;justify-content: space-around;">
+        <div *ngFor="let categoria of categorias">
+            <div fxFlex="33" class="courseTile" (click)="navigateWithParams(categoria.id)">
+                <mat-card class="home-fancy-card" style="min-height: 315px;width: 220px;">
+                  <div fxLayout="column">
+                    <div class="text-center">
+                        <h1 class="m-0 font-light"
+                        style="color: black;background-color: rgba(255, 255, 255, 0.7);text-align: center;border-radius: 10%;">
+                        {{categoria.name}}</h1>
+                    </div>
+                    <div style="background-image: url('assets/route.jpg');background-size: cover;height: 150px;">
+                        <img [src]="categoria.cover" style="width: 220px;height: 150px;">
+                    </div>
+        
+                    <p class="m-0 description" style="text-align: center;">{{categoria.desc}}
+                    </p>
+                    <span fxFlex></span>
+        
+                  </div>
+                </mat-card>
+              </div>
+        </div>
+         
+      </div>
+    </div>
+</section>
+  
+  <footer class="home-footer">
+    <section class="home-footer-top" style="padding-left: 10%; padding-right: 10%;margin-top: 5%;">
+      <div class="container">
+        <div fxLayout="row" fxLayout.lt-md="column" fxLayoutWrap="nowrap" style="display: flex;">
+          <div fxFlex="50" class="footer-box">
+            <h4 class="footer-box-title"><b>Servicio Educweb</b></h4>
+            <p>Descarga nuestra aplicación móvil para tener una experiencia de aprendizaje única en la materia de Arquitectura de Computadores con varios temas y lecturas que te ayudarán en la materia.</p>
+            <div>
+                <img src="../../assets/play_store.png" style="width: 35%;">
+            </div>
+          </div>
+          <div fxFlex="50" class="footer-box">
+            <h4 class="footer-box-title"><b>Contactos</b></h4>
+            <mat-list>
+              <mat-list-item>
+                <mat-icon mat-list-icon color="accent">email</mat-icon>
+                <h5 matLine><b>Correos</b></h5>
+                <p matLine> charlie.lopez@epn.edu.ec </p>
+                <p matLine> aaron.cruz@epn.edu.ec </p>
+              </mat-list-item>
+              <mat-list-item>
+                <mat-icon mat-list-icon color="accent">location_on</mat-icon>
+                <h5 matLine><b>Dirección</b></h5>
+                <p matLine>Quito, Pichincha</p>
+                <p matLine>Av. Ladrón de Guevara 253, Quito 170517 </p>
+              </mat-list-item>
+            </mat-list>
+          </div>
+        </div>
+      </div>
+    </section>
+  </footer>
