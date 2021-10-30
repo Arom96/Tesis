@@ -1,0 +1,15 @@
+.delete-img {
+  position: absolute;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  right: 1;
+  background: #a00;
+  color: #fff;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  z-index: 100;
+  cursor: pointer;
+}

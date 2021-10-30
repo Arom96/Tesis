@@ -1,0 +1,32 @@
+<div style="position: absolute;
+width: 300px;
+height: 100px;
+top: 0;
+z-index: 999999;"></div>
+<div style="display: flex;justify-content: center;align-content: center;margin: 30px;">
+    <span style="padding: 30px;border: 2px solid;border-radius: 15px;background: antiquewhite;">
+        Su usuario se encuentra en espera de aprobación
+    </span>
+</div>
+<div *ngIf="notes != ''" style="display: flex;justify-content: center;align-content: center;margin: 30px;">
+    <span style="padding: 30px;border: 2px solid;border-radius: 15px;background: #e85d5d8f;">
+        {{ notes }}
+    </span>
+</div>
+<div style='display: flex;flex-direction: column;align-content: center;align-items: center;justify-content: flex-start;margin-top: 25px;border: 2px solid;margin: 30px;border-radius: 15px;'>
+    <br>
+    <span style="font-family: sans-serif;font-size: 18px;font-weight: bold;">Debe proporcionar una foto del carnet de profesor</span>
+    <!-- Imagen de usuario preview -->
+    <br>
+    <div *ngIf="userUrl == ''">
+        <img src='../../assets/user-palceholder.png' style="width: auto;height: 100px;">
+    </div>
+    <div *ngIf="userUrl != ''" style="margin-top: 25px;margin-bottom: 25px;">
+        <img [src]='userUrl' style="width: 8.5cm;height: 5.5cm;border-radius: 10px;object-fit: cover;">
+    </div>
+    <!-- Select imagen -->      
+    <input #file type="file" [hidden]="true" accept="image/png, image/gif, image/jpeg" (change)="detectFiles($event)">
+    <button mat-button #upload onclick="return false" (click)="file.click()" style="background: #a00000;color: white;">Cargar y Enviar para aprobación</button>
+    <br>
+</div>
+

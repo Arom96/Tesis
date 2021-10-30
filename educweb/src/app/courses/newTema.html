@@ -1,0 +1,17 @@
+<div>
+    <span>{{ name }} - Nuevo Tema</span>
+    <div>
+        <form style="display: flex;flex-direction: column;align-items: center;align-content: center;">
+            <mat-form-field  style="margin-top: 20px;">
+                <mat-label>Nombre</mat-label>
+                <input matInput maxlength="50" [formControl]="NameInput">
+            </mat-form-field>
+            <div style="display: flex;flex-direction: column;">
+                <!-- Boton -->
+                <button mat-raised-button color="primary" style="margin-top: 30px;" (click)="createTema()">
+                    Registrar tema
+                </button>
+            </div>
+        </form>               
+    </div>
+</div>

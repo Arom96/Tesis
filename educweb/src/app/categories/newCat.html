@@ -1,0 +1,62 @@
+<div *ngIf="process=='new'">
+    <span>Nueva Categoria</span>
+    <div>
+        <form style="display: flex;flex-direction: column;align-items: center;align-content: center;">
+            <div *ngIf="uploadLink != ''" style="margin-top: 10px">
+                <img [src]='uploadLink' style="width: 150px;height: 90px;border-radius: 10px;object-fit: cover;">
+            </div>
+            <mat-form-field  style="margin-top: 20px;">
+                <mat-label>Nombre</mat-label>
+                <input matInput [formControl]="NameInput">
+            </mat-form-field>
+            <mat-form-field  style="margin-top: 20px;">
+                <mat-label>Descripcion</mat-label>
+                <textarea matInput maxlength="250" [formControl]="DescriptInput" style="min-height: 150px;max-height: 300px;"></textarea>
+            </mat-form-field>
+            
+            <div style="display: flex;flex-direction: column;">
+                <!-- Select imagen -->      
+                <input #file type="file" [hidden]="true" accept="image/png, image/gif, image/jpeg" (change)="detectFiles($event)">
+                <button mat-button #upload onclick="return false" (click)="file.click()" style="background: #a00;color:white">Elegir Cover</button>
+                <div *ngIf="uploading">
+                    <mat-spinner></mat-spinner>
+                </div>
+                <!-- Boton -->
+                <button id="save" mat-raised-button color="primary" style="margin-top: 30px;" (click)="createCat()">
+                    Registrar categoria
+                </button>
+            </div>
+        </form>               
+    </div>
+</div>
+<div *ngIf="process=='edit'">
+    <span>Editar Categoria</span>
+    <div>
+        <form style="display: flex;flex-direction: column;align-items: center;align-content: center;">
+            <div *ngIf="uploadLink != ''" style="margin-top: 15px">
+                <img [src]='uploadLink' style="width: 150px;height: 90px;border-radius: 10px;object-fit: cover;">
+            </div>
+            <mat-form-field  style="margin-top: 20px;">
+                <mat-label>Nombre</mat-label>
+                <input matInput [formControl]="NameInput">
+            </mat-form-field>
+            <mat-form-field  style="margin-top: 20px;">
+                <mat-label>Descripcion</mat-label>
+                <textarea matInput maxlength="100" [formControl]="DescriptInput" style="min-height: 180px;max-height: 300px;"></textarea>
+            </mat-form-field>
+            
+            <div style="display: flex;flex-direction: column;">
+                <!-- Select imagen -->      
+                <input #file type="file" [hidden]="true" accept="image/png, image/gif, image/jpeg" (change)="detectFiles($event)">
+                <button mat-button #upload onclick="return false" (click)="file.click()" style="background: #a00;color: white;">Elegir Cover</button>
+                <div *ngIf="uploading">
+                    <mat-spinner></mat-spinner>
+                </div>
+                <!-- Boton -->
+                <button id="save" mat-raised-button color="primary" style="margin-top: 30px;" (click)="updateCat()">
+                    Actualizar categoria
+                </button>
+            </div>
+        </form>               
+    </div>
+</div>

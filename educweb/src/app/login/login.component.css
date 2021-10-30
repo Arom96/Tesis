@@ -1,0 +1,12 @@
+.login-container{
+    display: flex;
+    width: 90%;
+    max-width: 500px;
+    background: whitesmoke;
+    justify-content: center;
+    margin: 30px;
+    height: 350px;
+    box-shadow: 5px 5px 10px -6px darkslategrey;
+    border-radius: 15px;
+    height: 570px;
+}

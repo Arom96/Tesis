@@ -1,0 +1,237 @@
+<div style="display: flex;flex-direction: row;height: 90vh;">
+  <div style="height: auto;min-height: 91vh;background: black;">
+    <div
+      style="color: white;margin: 10px;font-weight: bold;font-size: 22px;align-items: center;display: flex;display: flex;width: 230px;">
+      <!-- <mat-icon class="icono" style="color: white;margin: 10px;margin-left: 3px;cursor: pointer;" (click)="navigateWithParams()">arrow_back_ios_new</mat-icon> -->
+      <div style="display: flex;flex-direction: column;align-items: center;width: 100%;">
+        <div *ngIf="usrImg == ''">
+          <button mat-icon-button style="width: auto; height: auto;" [matMenuTriggerFor]="menu">
+            <img src="../assets/user-palceholder.png" style="width: 35px; height: 35px;padding: 5px;">
+          </button>
+        </div>
+        <div *ngIf="usrImg != ''" style="display: flex;">
+          <button mat-icon-button tyle="width: 50px; height: 50px;" [matMenuTriggerFor]="menu">
+            <img [src]="usrImg" style="width: 40px; height: 40px; border-radius: 50%;object-fit: cover;padding: 5px;">
+          </button>
+        </div>
+        <span style="margin-right: 10px;margin-top: 10px;">{{userName}}</span>
+      </div>
+    </div>
+    <mat-divider style="margin-bottom: 5px;margin-top: 5px;background: white;"></mat-divider>
+    <div style="display: flex;flex-direction: column;">
+      <button mat-icon-button routerLink='/profile' style="color: white;">
+        <mat-icon class="icono" style="color: white;margin-right: 10px;margin-left: 10px;">badge</mat-icon>Mi Cuenta
+      </button>
+      <div *ngIf="usrRole != 'admin'">
+        <button mat-icon-button routerLink='/categories' style="color: white;">
+          <mat-icon class="icono" style="color: white;margin-right: 10px;margin-left: 10px;">dashboard_customize
+          </mat-icon>Categorias
+        </button>
+      </div>
+      <div *ngIf="usrRole != 'admin'">
+        <button mat-icon-button routerLink='/courses' style="color: white;font-weight: bold;font-size: 20px;">
+          <mat-icon class="icono" style="color: white;margin-right: 10px;margin-left: 10px;">grading</mat-icon>Contenido
+        </button>
+      </div>
+      <div *ngIf="usrRole == 'admin'">
+        <button mat-icon-button routerLink='/approval' style="color: white;">
+          <mat-icon class="icono" style="color: white;margin-right: 10px;margin-left: 10px;">grading</mat-icon>Ver
+          Peticiones
+        </button>
+      </div>
+    </div>
+  </div>
+  <div
+    style="display: none;flex-direction: column;align-items: center;padding: 15px;border: 2px solid;margin: 5px;border-radius: 15px;">
+    <div style="text-decoration: underline;width: 100%;font-size: 21px;">
+      <span>Cursos</span>
+      <button mat-icon-button (click)="openCreateTema()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+    <div style="display: flex;flex-direction: column;">
+      <div *ngFor="let cat of Categories">
+        <button mat-flat-button [id]="cat.name" (click)="showCatDetails(cat)">{{cat.name}}</button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="selecedCat == ''"
+    style="display: flex;flex-direction: column;align-items: center;width: 100%;padding: 15px;overflow: auto;margin: 5px;border-radius: 15px;">
+
+    <div style="margin-top: -10px;margin-bottom: 10px;font-size: 19px;font-weight: bold;"><span>Aquí se muestran los
+        temas de las categorías</span></div>
+    <div fxLayout="row" fxLayout.lt-md="column" fxLayoutWrap="nowrap" fxLayoutGap="20px"
+      style="display: flex;flex-direction: row;flex-wrap: wrap;gap: 10px;justify-content: space-around;">
+      <div *ngFor="let categoria of Categories">
+        <div fxFlex="33" class="courseTile" (click)="showCatDetails(categoria)" style="text-align: center;">
+          <mat-card class="home-fancy-card" style="min-height: 315px;width: 220px;cursor: pointer;">
+            <div fxLayout="column">
+              <div class="text-center">
+                <span class="m-0 font-light"
+                  style="color: black;background-color: rgba(255, 255, 255, 0.7);text-align: center;border-radius: 10%;font-size: 20px;font-weight: bold">
+                  {{categoria.name}}</span>
+              </div>
+              <div style="background-image: url('assets/route.jpg');background-size: cover;height: 150px;">
+                <img [src]="categoria.cover" style="width: 220px;height: 150px;">
+              </div>
+
+              <p class="m-0 description" style="text-align: center;">{{categoria.desc}}
+              </p>
+              <span fxFlex></span>
+            </div>
+            <div style="position: absolute;bottom: 5px;width: 89%;text-align: center;">
+              <button mat-button [matBadge]='categoria.numero' style="background: #a00;width: 80%;color: white;">Ver</button>
+            </div>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="selecedCat != ''"
+    style="display: flex;flex-direction: column;align-items: center;width: 80%;padding: 15px;margin: 5px;border-radius: 15px;">
+    <div style="position: absolute;right: 0;margin: 25px;top: 59px;">
+      <button mat-button (click)="openCreateTema()" style="background-color: #A40000;color: white;height: 44px;">
+        <mat-icon>add</mat-icon>
+        Nuevo
+      </button>
+    </div>
+    <div style="width: 100%;margin-bottom: 10px;">
+      <button mat-button (click)="selecedCat = ''" style="background-color: #A60000;color: white;">
+        <mat-icon class="icono" style="color: white;margin: 10px;margin-left: 3px;cursor: pointer;"
+          (click)="selecedCat = ''">arrow_back_ios_new</mat-icon>
+        Volver
+      </button>
+    </div>
+
+    <mat-accordion style="width: 100%;">
+      <div *ngFor="let tema of selectedTema; trackBy:trackByIdentity" style="margin: 5px;">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <div style="text-align: left;">
+                <div style="font-size: 16px;">
+                  {{ tema.nombre }}
+                </div>
+                <div style="font-size: x-small;font-weight: bold;font-style: italic;color: #FCB823;">
+                  {{ tema.Autor }}
+                </div>
+              </div>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-divider></mat-divider>
+          <mat-divider></mat-divider>
+
+          <!-- Acordion con Lecturas -->
+          <div style="margin-top: 5px;">
+            <mat-accordion style="margin-top: 5px;">
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>Lecturas</mat-panel-title>
+                </mat-expansion-panel-header>
+                <ul style="text-align: left;">
+                  <div *ngFor="let task of tema.lecturas; let i = index">
+                    <li>
+                      <div>
+                        <div><h3>Tema de la lectura:</h3> {{ task.nombre }}</div>
+                        <div><h3>Autor:</h3> {{ task.autor }}</div>
+                        <div style="color: green;font-size: 15px;margin-top: -6px;">
+                          <h3>Nivel de lectura:</h3> {{ task.level }}
+                        </div>
+                      </div>
+                      <div><h3>Descripción:</h3> {{ task.desc }}</div>
+
+
+                      <div *ngIf="task.url_youtube"><h3>Video:</h3>
+                        <div style="display: flex; justify-content: center; align-items: center;">
+                          <youtube-player [videoId]="task.url_youtube.split('?v=')[1]" suggestedQuality="highres"
+                            [height]="250" [width]="500">
+                          </youtube-player>
+                        </div>
+                        <!-- <a [href]="task.url_youtube" target="_blank">Reproducir
+                          Video</a> -->
+                      </div>
+
+                      <div *ngIf="task.images">
+                        <h3>Imágenes:</h3>
+                        <div style="display: flex; justify-content: center; align-items: center;">
+                          <div *ngFor="let image of task.images; let i = index">
+                            <img [src]="image" srcset="" style="width: 150px; 
+                                          height: 150px;
+                                          margin-left: 5px;
+                                          margin-right: 5px;">
+                          </div>
+                        </div>
+
+                      </div>
+                      <button mat-button
+                        style="margin-left: 10px;margin: 7px;border: 2px solid #FCB823;border-radius: 11px;"
+                        (click)="goToLink(task.doc)">Ver documento</button>
+                      <button mat-button (click)="openConfirmDelete(task, tema)"
+                        style="background: #a00;color:white;margin-right: 5px;">Eliminar</button>
+                      <button mat-button (click)="OpenEditLectura(task, tema.nombre, i)"
+                        style="background: rgb(119, 155, 78);">Editar</button>
+                    </li>
+                  </div>
+                </ul>
+                <mat-action-row>
+                  <button mat-button (click)="openCreateLectura(tema.nombre)"
+                    style="background: #a00;color:white;">Nueva Lectura</button>
+                  <div style="flex: 1 0 auto;"></div>
+                </mat-action-row>
+              </mat-expansion-panel>
+
+
+            </mat-accordion>
+
+          </div>
+          <!-- Acordion con documentos -->
+          <div style="margin-top: 5px;">
+            <mat-accordion style="margin-top: 5px;">
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>Prueba</mat-panel-title>
+                </mat-expansion-panel-header>
+                <ul style="text-align: left;">
+                  <div *ngFor="let task of tema.pruebas; let i = index">
+                    <li>{{ task.name }}
+                      <button mat-button
+                        style="margin-left: 10px;margin: 7px;border: 2px solid #FCB823;border-radius: 11px;"
+                        (click)="viewPrueba(task)">Ver</button>
+                      <button mat-button
+                        style="margin-left: 10px;margin: 7px;border: 2px solid #FCB823;border-radius: 11px;"
+                        (click)="openEditPrueba(task, tema.nombre, i)">Editar</button>
+                      <button mat-button (click)="openConfirmDeletePrueba(task, tema)"
+                        style="background: #a00;color:white;">Eliminar</button>
+                    </li>
+                  </div>
+                </ul>
+                <mat-action-row>
+                  <button mat-button (click)="openCreatePrueba(tema.nombre)" style="background: #a00;color:white;">Nueva
+                    Prueba</button>
+                  <div style="flex: 1 0 auto;"></div>
+                </mat-action-row>
+              </mat-expansion-panel>
+
+            </mat-accordion>
+
+          </div>
+          <mat-action-row>
+            <!-- <button mat-button (click)="showPrintContract(order.Fecha, order.Entrega, order.Value, order.Sucursal, order.Client.name, order.Client.lastname, order.Client.id, order.FOS.name, order.Title, order.Descript)">Ver Contrato</button> -->
+            <div style="flex: 1 0 auto;"></div>
+          </mat-action-row>
+
+        </mat-expansion-panel>
+      </div>
+    </mat-accordion>
+  </div>
+
+
+
+</div>
+
+<mat-menu #menu="matMenu">
+  <!-- <div *ngIf="isLogged && User.role == 'profesor' && User.enabled">
+    <button mat-menu-item routerLink='courses'>Cursos</button>
+  </div> -->
+  <button mat-menu-item (click)="logOutUser()">Cerrar Sesion</button>
+</mat-menu>
