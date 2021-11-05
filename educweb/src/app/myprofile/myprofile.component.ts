@@ -86,9 +86,23 @@ export class MyprofileComponent implements OnInit {
     }
     else
     {
-      this.userService.updateUser(this.User.uid, this.options.get('namesControl').value, this.options.get('lastnamesControl').value, this.userUrl).then(any => this.snack.open('Cambios guardados!', '', {duration: 2000}));
+      this.userService.updateUser(this.User.uid, this.options.get('namesControl').value, this.options.get('lastnamesControl').value, this.userUrl).then(any => this.snack.open('Datos actualizados con éxito', '', {duration: 2000}));
     }
     
+  }
+
+  validarCampos(campo){
+    console.log(campo)
+    let valor = campo.value;
+    // Verifica si el valor del campo (input) contiene numeros.
+    if(/\d/.test(valor)) {
+  
+    /* 
+     * Remueve los numeros que contiene el valor y lo establece
+     * en el valor del campo (input).
+     */
+      campo.value = valor.replace(/\d/g,'');
+    }
   }
 
   //cambia la navegacion a login/register con parametros

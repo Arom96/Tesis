@@ -26,6 +26,7 @@ export class Upload{
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent implements OnInit {
   hide = true;
   selected = 0;
@@ -34,6 +35,8 @@ export class LoginComponent implements OnInit {
   showCardUpload = false;
   userUrl = '';
   currentUpload;
+  clearname = '';
+  clearlastname = '';
 
 
   options = new FormGroup({
@@ -87,9 +90,11 @@ export class LoginComponent implements OnInit {
     let val1 = this.options.get('namesControl').value.match(/\d+/g);
     let val2 = this.options.get('lastnamesControl').value.match(/\d+/g);
 
-    if(this.options.get('namesControl').value.replace(/\s/g, '').length == 0 || this.options.get('lastnamesControl').value.replace(/\s/g, '').length == 0 )
+    if(this.options.get('namesControl').value.replace(/\s/g, '').length == 0 || this.options.get('lastnamesControl').value.replace(/\s/g, '').length == 0)
     {
       this.snack.open('Por favor revisar los campos...', '', {duration: 2000})
+      this.options.get('namesControl').value.trim();
+      this.options.get('lastnamesControl').value.trim();
       this.options.get('namesControl').clearAsyncValidators;
       this.options.get('lastnamesControl').clearAsyncValidators;
       return
@@ -114,7 +119,7 @@ export class LoginComponent implements OnInit {
           this.options.get('roleControl').setValue('');
           if(result== 'ok'){
             this.delay(100).then(any =>{
-              this.snack.open('Usuario creado con éxito... En espera de aprobación.', 'x', {duration: 5000});
+              this.snack.open('Usuario creado con éxito y en espera de aprobación.', 'x', {duration: 5000});
             })
             
           }
@@ -126,6 +131,21 @@ export class LoginComponent implements OnInit {
       
     }
     
+  }
+
+
+  validarCampos(campo){
+    console.log(campo)
+    let valor = campo.value;
+    // Verifica si el valor del campo (input) contiene numeros.
+    if(/\d/.test(valor)) {
+  
+    /* 
+     * Remueve los numeros que contiene el valor y lo establece
+     * en el valor del campo (input).
+     */
+      campo.value = valor.replace(/\d/g,'');
+    }
   }
 
   changeSelection(selection){

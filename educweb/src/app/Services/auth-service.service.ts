@@ -27,7 +27,7 @@ export class AuthServiceService {
   resetPassword(mail)
   {
     this.afsAuth.sendPasswordResetEmail(mail)
-    this.snack.open('Se envio un correo para reestablecer la contraseña', '', {duration: 2500})
+    this.snack.open('Se envió un correo para reestablecer la contraseña', '', {duration: 2500})
   }
 
   createMailUser(mail, pass, name, lastname, roles, cedula?:'', celularm?:'', dir?:'', url?:'', birthdate?:''){
@@ -57,7 +57,7 @@ export class AuthServiceService {
     }).finally(() => {
       if(!errorC)
       {
-        this.snack.open('Usuario creado con exito y en espera de aprobacion.', '', {duration: 3000}) 
+        this.snack.open('Usuario creado con éxito y en espera de aprobación.', '', {duration: 3000}) 
         if(roles == 'profesor')
         {
           this.afsAuth.signInWithEmailAndPassword(mail, pass).then(credential =>{
@@ -79,7 +79,7 @@ export class AuthServiceService {
     .catch(msg =>{
       console.log(msg);
     }).finally(() => {
-      this.snack.open('Usuario eliminado con exito', '', {duration: 2000});
+      this.snack.open('El usuario ha sido rechazado y eliminado', '', {duration: 3000});
     });
   }
 
@@ -90,6 +90,7 @@ export class AuthServiceService {
   isAuth(){
   return this.afsAuth.authState.pipe(map(auth => auth ));
   }
+
 
   updateUserRoles(role){
   this.UserRoles = role;
@@ -158,10 +159,11 @@ export class AuthServiceService {
     }))
   }
 
-  createNot(name, time){
+  createNot(name, time, userName){
     const res = this.afs.collection('notifications').add({
       desc: name,
       cat: time,
+      autor: userName,
     })
     console.log(res.then(result =>{
       const userRef: AngularFirestoreDocument<any> = this.afs.doc(`notifications/${result.id}`);

@@ -1,5 +1,5 @@
 <div style="display: flex;flex-direction: row;">
-    <div style="width: 290px;height: auto;min-height: 91vh;background: black;">
+    <div style="width: 290px;height: auto;min-height: 91vh;background: #C98C3D;">
         <div style="color: white;margin: 10px;font-weight: bold;font-size: 22px;align-items: center;display: flex;display: flex;width: 230px;">
             <!-- <mat-icon class="icono" style="color: white;margin: 10px;margin-left: 3px;cursor: pointer;" (click)="navigateWithParams()">arrow_back_ios_new</mat-icon> -->
             <div style="display: flex;flex-direction: column;align-items: center;width: 100%;">
@@ -47,7 +47,7 @@
                     <!-- Nombres -->
                     <mat-form-field appearance="legacy" color="primary" style="width: 300px;margin-top: 20px;">
                         <mat-label>Nombres</mat-label>
-                        <input matInput formControlName="namesControl" autocomplete="off">
+                        <input matInput (keyup)="validarCampos($event.target)" type="text" formControlName="namesControl" autocomplete="off">
                         <mat-error>
                         <strong>Solo se permiten letras</strong>
                         </mat-error>
@@ -55,7 +55,7 @@
                     <!-- Apellidos -->
                     <mat-form-field appearance="legacy" color="primary" style="width: 300px;">
                         <mat-label>Apellidos</mat-label>
-                        <input matInput formControlName="lastnamesControl" autocomplete="off">
+                        <input matInput (keyup)="validarCampos($event.target)" type="text" formControlName="lastnamesControl" autocomplete="off">
                         <mat-error>
                         <strong>Solo se permiten letras</strong>
                         </mat-error>
@@ -92,5 +92,5 @@
     <!-- <div *ngIf="isLogged && User.role == 'profesor' && User.enabled">
       <button mat-menu-item routerLink='courses'>Cursos</button>
     </div> -->
-    <button mat-menu-item (click)="logOutUser()">Cerrar Sesion</button>
+    <button mat-menu-item (click)="logOutUser()">Cerrar Sesión</button>
 </mat-menu>

@@ -1,5 +1,5 @@
 <div style="display: flex;flex-direction: row;height: 90vh;">
-  <div style="height: auto;min-height: 91vh;background: black;">
+  <div style="height: auto;min-height: 91vh;background: #C98C3D;">
     <div
       style="color: white;margin: 10px;font-weight: bold;font-size: 22px;align-items: center;display: flex;display: flex;width: 230px;">
       <!-- <mat-icon class="icono" style="color: white;margin: 10px;margin-left: 3px;cursor: pointer;" (click)="navigateWithParams()">arrow_back_ios_new</mat-icon> -->
@@ -75,7 +75,7 @@
                 <img [src]="categoria.cover" style="width: 220px;height: 150px;">
               </div>
 
-              <p class="m-0 description" style="text-align: center;">{{categoria.desc}}
+              <p class="m-0 description" style="text-align: center; width: 100%;height: 52px;overflow: hidden;">{{ categoria.desc }}
               </p>
               <span fxFlex></span>
             </div>
@@ -128,6 +128,11 @@
                 <mat-expansion-panel-header>
                   <mat-panel-title>Lecturas</mat-panel-title>
                 </mat-expansion-panel-header>
+                <mat-action-row>
+                  <button mat-button (click)="openCreateLectura(tema.nombre)"
+                    style="background: #a00;color:white;">Nueva Lectura</button>
+                  <div style="flex: 1 0 auto;"></div>
+                </mat-action-row>
                 <ul style="text-align: left;">
                   <div *ngFor="let task of tema.lecturas; let i = index">
                     <li>
@@ -173,11 +178,7 @@
                     </li>
                   </div>
                 </ul>
-                <mat-action-row>
-                  <button mat-button (click)="openCreateLectura(tema.nombre)"
-                    style="background: #a00;color:white;">Nueva Lectura</button>
-                  <div style="flex: 1 0 auto;"></div>
-                </mat-action-row>
+                
               </mat-expansion-panel>
 
 
@@ -233,5 +234,5 @@
   <!-- <div *ngIf="isLogged && User.role == 'profesor' && User.enabled">
     <button mat-menu-item routerLink='courses'>Cursos</button>
   </div> -->
-  <button mat-menu-item (click)="logOutUser()">Cerrar Sesion</button>
+  <button mat-menu-item (click)="logOutUser()">Cerrar Sesión</button>
 </mat-menu>

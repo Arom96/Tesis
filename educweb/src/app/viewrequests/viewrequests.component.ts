@@ -83,7 +83,7 @@ export class ViewrequestsComponent implements OnInit {
 
   AlertRequests(user){
     this.authService.alertUser(user.uid);
-    this.snack.open('El usuario ha sido alertado!', '', {duration: 2500});
+    this.snack.open('El usuario fue alertrado', '', {duration: 3000});
   }
 
   goToLink(url: string){
