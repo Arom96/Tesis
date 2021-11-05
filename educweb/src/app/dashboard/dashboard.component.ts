@@ -158,11 +158,11 @@ export class DashboardComponent implements OnInit {
         console.log(result);
         if(result != undefined){
           this.createTema(result);
-          this.snack.open('Tema creado con exito', '', {duration: 2000})
+          this.snack.open('Tema creado con éxito', '', {duration: 2000})
         }
       })
     }
-    else{this.snack.open('Debe seleccionar un tema antes!.', '', {duration: 2500})}
+    else{this.snack.open('Primero seleccione un tema', '', {duration: 2500})}
     
   }
 
@@ -196,7 +196,7 @@ export class DashboardComponent implements OnInit {
       if(result != undefined){
         console.log(result)
         this.createLectura(padre, result.name, result.file, result.desc, result.level);
-        this.snack.open('Lectura creada con exito', '', {duration: 2000})
+        this.snack.open('Lectura creada con éxito', '', {duration: 2000})
       }
     })
   }
@@ -210,7 +210,7 @@ export class DashboardComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result =>{
       if(result != undefined){
         console.log(result)
-        this.snack.open('Lectura creada con exito', '', {duration: 2000})
+        this.snack.open('Lectura creada con éxito', '', {duration: 2000})
       }
     })
   }
@@ -226,7 +226,7 @@ export class DashboardComponent implements OnInit {
       if(result != undefined){
         console.log(result)
         this.editLectura(lecturas, result.name, result.file, result.desc, result.level, index);
-        this.snack.open('Lectura editada con exito', '', {duration: 2000})
+        this.snack.open('Lectura actualizada', '', {duration: 2000})
       }
     })
   }
@@ -241,7 +241,7 @@ export class DashboardComponent implements OnInit {
       if(result != undefined){
         console.log(result)
         this.createPrueba(padre, result.name, result.payload)
-        this.snack.open('Prueba agregada con exito', '', {duration: 2000})
+        this.snack.open('Prueba agregada con éxito', '', {duration: 2000})
       }
     })
   } 
@@ -355,7 +355,7 @@ export class DashboardComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result =>{
       if(result == 'created'){
-        this.snack.open('Categoria creada con exito', '', {duration: 2000})
+        this.snack.open('Categoría creada con éxito', '', {duration: 2000})
       }
     })
   }

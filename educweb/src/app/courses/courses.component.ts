@@ -28,6 +28,12 @@ export class CoursesComponent implements OnInit {
   usrID;
   urlSafe: SafeResourceUrl;
 
+  // variables para comprobar temas
+  temacreado: boolean = false;
+
+  // varibales para guardar el arreglo de lecturas
+  listalecturas: any[];
+
   constructor(
     private auth: AuthServiceService,
     public dialog: MatDialog,
@@ -58,24 +64,17 @@ export class CoursesComponent implements OnInit {
   }
 
   openCreateTema() {
+    
     if (this.selecedCat != '') {
       const dialogRef = this.dialog.open(NewTemaDialog, {
         width: '300px',
         data: { data: this.selecedCat, process: 'new' }
       });
       dialogRef.afterClosed().subscribe(result => {
-        console.log(result);
-        if (result != undefined) {
-          if (result.replace(/\s/g, '').length !=0) {
-            this.createTema(result);
-            this.snack.open('Tema creado con éxito', '', { duration: 2000 })
-          } else {
-            this.snack.open('Debe ingresar un nombre', '', { duration: 2000 })
-          }
-        }
-        if (result == null) {
-          this.snack.open('Debe ingresar un nombre', '', { duration: 2000 })
-        }
+
+        this.createTema(result);
+        this.snack.open('Tema creado con éxito', '', { duration: 2500 })
+
       });
     } else {
       this.snack.open('Debe seleccionar un tema antes!.', '', { duration: 2500 })
@@ -162,9 +161,23 @@ export class CoursesComponent implements OnInit {
   }
 
   openCreateLectura(padre) {
+
+    console.log(padre);
+    
+
+    for (let i = 0; i < this.selecedCat['temas'].length; i++) {
+      if (this.selecedCat['temas'][i].nombre == padre) {
+        this.listalecturas = this.selecedCat['temas'][i].lecturas;
+        break;
+      }
+    }
+
+    console.log(this.listalecturas);
+    
+    
     const dialogRef = this.dialog.open(NewLecturaDialog, {
       width: '80vw',
-      data: { data: '', process: 'new' }
+      data: { data: '', process: 'new', lecturas: this.listalecturas }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -309,7 +322,7 @@ export class CoursesComponent implements OnInit {
   }
 
   createTema(name) {
-    console.log(name.replace(/\s/g, '').length)
+
     if (name.replace(/\s/g, '').length !=0) {
       console.log(this.selecedCat);
       let id = this.selecedCat['id'];
@@ -318,7 +331,7 @@ export class CoursesComponent implements OnInit {
       this.auth.pushNewTema(id, temas);
       let current_datetime = new Date();
       let formatted_date = current_datetime.getFullYear() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate() + " " + current_datetime.getHours() + ":" + current_datetime.getMinutes() + ":" + current_datetime.getSeconds() 
-      this.auth.createNot('Nuevo tema "'+name+'" disponible en la categoria: '+this.selecedCat['name'], formatted_date)
+      this.auth.createNot('Nuevo tema "'+name+'" disponible en la categoría: '+this.selecedCat['name'], formatted_date, this.userName)
       this.selecedCat = '';
     } else {
       this.snack.open('Debe ingresar un nombre', '', { duration: 2000 })
@@ -346,7 +359,7 @@ export class CoursesComponent implements OnInit {
     this.auth.pushNewTema(id, temas);
     let current_datetime = new Date();
     let formatted_date = current_datetime.getFullYear() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate() + " " + current_datetime.getHours() + ":" + current_datetime.getMinutes() + ":" + current_datetime.getSeconds() 
-    this.auth.createNot('Nueva lectura: "'+name+'" esta disponible en: '+padre, formatted_date)
+    this.auth.createNot('Nueva lectura: "'+name+'" esta disponible en: '+padre, formatted_date, this.userName)
   }
 
   editLectura(padre, name, doc, desc, level, index, images, url_youtube) {
@@ -368,25 +381,6 @@ export class CoursesComponent implements OnInit {
     this.auth.pushNewTema(id, temas);
   }
 
-  /*agregarLinkYoutube(){
-    
-    if(valor==0){
-      this.urlSafe.push(this.fb.control(
-      '', [Validators.required, Validators.pattern('^(http(s)?:\/\/)?((w){3}.)?youtu(be|.be)?(\.com)?\/.+')]
-      ));
-    }else if(valor<=2){
-      this.linkerror=false;
-      this.urlSafe.get(refe.toString()).markAsTouched;
-      if(this.urlSafe.get(refe.toString()).invalid){
-          this.urlSafe.get(refe.toString()).setErrors;
-          this.linkerror=true;
-      }else{
-        this.urlSafe.push(this.fb.control(
-       '', [Validators.required, Validators.pattern('^(http(s)?:\/\/)?((w){3}.)?youtu(be|.be)?(\.com)?\/.+')]
-        ));
-      }
-    }
-  }*/
 
   createPrueba(padre, name, url, uid) {
     let id = this.selecedCat['id'];
@@ -405,7 +399,7 @@ export class CoursesComponent implements OnInit {
     this.auth.pushNewTema(id, temas);
     let current_datetime = new Date();
     let formatted_date = current_datetime.getFullYear() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate() + " " + current_datetime.getHours() + ":" + current_datetime.getMinutes() + ":" + current_datetime.getSeconds() 
-    this.auth.createNot('Nueva prueba "'+name+'" esta disponible en: '+padre, formatted_date)
+    this.auth.createNot('Nueva prueba "'+name+'" esta disponible en: '+padre, formatted_date, this.userName)
   }
 
 
@@ -471,20 +465,25 @@ export class CoursesComponent implements OnInit {
 
 
 export class NewTemaDialog implements OnInit {
+
   currentUpload;
   uploadLink = ''
   process;
   name = '';
   public NameInput = new FormControl();
+
+  // varibale para comprobar el tema
+  temacreado: boolean = false;
+
   constructor(
     private storage: AngularFireStorage,
     private auth: AuthServiceService,
     public dialogRef: MatDialogRef<NewTemaDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private snack: MatSnackBar
   ) {
     if (this.data["data"] != undefined) {
       // this.user = this.data["usr"];
-      console.log(this.data['data']);
       this.name = this.data['data']['name'];
     }
     this.process = this.data.process;
@@ -496,9 +495,31 @@ export class NewTemaDialog implements OnInit {
   }
 
   createTema() {
-    let name = this.NameInput.value;
-    console.log(name);
-    this.dialogRef.close(name);
+
+    if(this.NameInput.value.trim() == '' || this.NameInput.value == undefined){
+      this.snack.open('Debe ingresar un nombre', '', { duration: 2000 });
+    }else{      
+
+      for (let i = 0; i < this.data['data'].temas.length; i++) {
+        if (this.NameInput.value.trim().toLocaleLowerCase() == this.data['data'].temas[i].nombre.toLocaleLowerCase()) {
+          this.temacreado = true;
+          break;
+        }else{
+          this.temacreado = false;
+        }
+      }
+
+      if (this.temacreado) {
+
+        this.snack.open("No hemos podido crear el tema por que ya existe, por favor verifique he intentelo nuevamente", '', {duration: 3600});
+      }else{
+        let name = this.NameInput.value.trim();
+        this.dialogRef.close(name);
+      }
+
+      
+    }
+    
   }
 
 }
@@ -515,6 +536,7 @@ export class NewTemaDialog implements OnInit {
   styleUrls: ['newLectura.css']
 })
 export class NewLecturaDialog implements OnInit {
+
   currentUpload;
   uploadLink = ''
   process;
@@ -530,6 +552,10 @@ export class NewLecturaDialog implements OnInit {
   imageData: string;
   dataImages: any[] = [];
   public urlYouTubeInput = new FormControl();
+
+  // varables para la lista de lecturas
+  listalecturas: any[];
+  comprobarlectura: boolean = false;
 
   constructor(
     private storage: AngularFireStorage,
@@ -551,6 +577,10 @@ export class NewLecturaDialog implements OnInit {
   isEditable = false;
 
   ngOnInit() {
+
+
+    this.listalecturas = this.data['lecturas'];    
+
     if (this.process == 'edit') {
       console.log('EDIT:', this.process, this.data);
       this.NameInput.setValue(this.data['data']['nombre']);
@@ -649,20 +679,37 @@ export class NewLecturaDialog implements OnInit {
     let desc = this.DescInput.value;
     let level = this.levelControl.value;
 
-    if (this.uploadLink == '') {
-      this.snack.open('Debe cargar un archivo.', '', { duration: 2500 });
+    if (this.uploadLink == '' || this.NameInput.value.trim().length == 0) {
+      this.snack.open('Revise que todos los campos esten llenos', '', { duration: 2500 });
     } else {
-      this.dialogRef.close({
-        'file': this.uploadLink,
-        'name': name,
-        'desc': desc,
-        'level': level,
-        'images': this.dataImages,
-        'url_youtube': this.urlYouTubeInput.value
-      });
-    }
 
-  }
+      for (let i = 0; i < this.listalecturas.length; i++) {        
+  
+        if ( name.trim().toLowerCase() == this.listalecturas[i].nombre.toLowerCase()) {
+          this.comprobarlectura = true;
+          break;
+        }else{
+          this.comprobarlectura = false;
+        }
+      }
+  
+      if (this.comprobarlectura) {
+        this.snack.open("La lectura ya existe por favor verifique he intente nuevamente", '', { duration: 3500 })
+      }else{
+
+        this.dialogRef.close({
+          'file': this.uploadLink,
+          'name': name,
+          'desc': desc,
+          'level': level,
+          'images': this.dataImages,
+          'url_youtube': this.urlYouTubeInput.value
+        });
+        
+      }
+
+    }    
+ }
 
   goToLink(url: string) {
     window.open(url, "_blank");
@@ -760,7 +807,7 @@ export class NewPruebaDialog implements OnInit, AfterViewInit {
       }
       else {
         error = true;
-        this.snack.open('Hay campos en blanco!', '', { duration: 3000 });
+        this.snack.open('Llene todos los campos', '', { duration: 3000 });
       }
 
     }

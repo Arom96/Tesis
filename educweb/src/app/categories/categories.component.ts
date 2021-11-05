@@ -31,6 +31,7 @@ export class Upload {
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.css']
 })
+
 export class CategoriesComponent implements OnInit {
   Categories = [];
   catDetailsSelected = 'initial';
@@ -40,7 +41,12 @@ export class CategoriesComponent implements OnInit {
   usrRole;
   usrUID;
 
-  constructor(public dialog: MatDialog, private snack: MatSnackBar, private auth: AuthServiceService, private router: Router, private Appc: AppComponent) { }
+  constructor(
+    public dialog: MatDialog, 
+    private snack: MatSnackBar, 
+    private auth: AuthServiceService, 
+    private router: Router, 
+    private Appc: AppComponent) { }
 
   ngOnInit(): void {
     this.userName = this.Appc.User.name;
@@ -53,6 +59,7 @@ export class CategoriesComponent implements OnInit {
       this.Categories = result;
       this.Categories.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
       console.log('Categorias:', this.Categories);
+      console.log(this.Categories);
     });
   }
 
@@ -151,9 +158,11 @@ export class CategoriesComponent implements OnInit {
 @Component({
   selector: 'newCat',
   templateUrl: 'newCat.html',
-  styleUrls: ['newCat.css']
+  styleUrls: ['newCat.css'],
 })
+
 export class NewCategoryDialog implements OnInit {
+ 
   currentUpload;
   uploadLink = ''
   process;
@@ -162,20 +171,27 @@ export class NewCategoryDialog implements OnInit {
   uploading = false;
   public NameInput = new FormControl();
   public DescriptInput = new FormControl();
+  Categories = [];
+  Categoriaverificar : boolean = false;
+  userName;
+
+
   constructor(private storage: AngularFireStorage, private auth: AuthServiceService, public dialogRef: MatDialogRef<NewCategoryDialog>, private snack: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {
     if (this.data["data"] != undefined) {
       // this.user = this.data["usr"];
-      console.log(this.data);
+      //console.log(this.data);
     }
     this.process = this.data.process;
     this.uid = this.data['data']['uid'];
     this.CatUID = this.data['data']['catUID'];
-    console.log(this.uid, this.CatUID);
+    
   }
 
-
   ngOnInit() {
+    let sub = this.auth.listCats().subscribe(result => {
+      this.Categories = result;
+    });
     if (this.process == 'edit') {
       this.NameInput.setValue(this.data['data']['name']);
       this.DescriptInput.setValue(this.data['data']['desc']);
@@ -204,21 +220,33 @@ export class NewCategoryDialog implements OnInit {
   }
 
   createCat() {
-    if (this.uploadLink != '' && this.NameInput.value.trim().length != 0) {
-      let name = this.NameInput.value;
-      let desc = this.DescriptInput.value;
-      console.log(name);
-      console.log(this.data['data'])
-      let sub = this.auth.createCategory(name, desc, this.uploadLink, this.data['data']);
-      let current_datetime = new Date();
-      let formatted_date = current_datetime.getFullYear() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate() + " " + current_datetime.getHours() + ":" + current_datetime.getMinutes() + ":" + current_datetime.getSeconds() 
-      this.auth.createNot('Nueva categoría "'+name+'" esta disponible', formatted_date)
-      this.dialogRef.close('created');
+    for(let i=0; i<this.Categories.length; i++){
+        if(this.Categories[i].name.toLowerCase() == this.NameInput.value.trim().toLowerCase()){
+          this.Categoriaverificar = true;
+          break;
+        }else{
+          this.Categoriaverificar = false;
+        }
     }
-    else {
-      this.snack.open('Debe seleccionar un cover/nombre.', '', { duration: 2000 })
+    if(this.Categoriaverificar){
+      this.snack.open('La categoría ya existe!', '', { duration: 3000 })
+    }else{
+      if (this.uploadLink != '' && this.NameInput.value.trim().length != 0) {
+        let name = this.NameInput.value;
+        let desc = this.DescriptInput.value;
+        console.log(name);
+        console.log(this.data['data'])
+        let sub = this.auth.createCategory(name, desc, this.uploadLink, this.data['data']);
+        /*let current_datetime = new Date();
+        this.userName = this.auth.getUserName();
+        let formatted_date = current_datetime.getFullYear() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate() + " " + current_datetime.getHours() + ":" + current_datetime.getMinutes() + ":" + current_datetime.getSeconds() 
+        this.auth.createNot('Nueva categoría "'+name+'" esta disponible', formatted_date, this.userName)*/
+        this.dialogRef.close('created');
+      }
+      else {
+        this.snack.open('Debe seleccionar un cover/nombre.', '', { duration: 2000 })
+      }
     }
-
   }
 
   updateCat() {

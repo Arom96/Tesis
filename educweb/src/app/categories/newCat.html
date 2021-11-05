@@ -1,5 +1,5 @@
 <div *ngIf="process=='new'">
-    <span>Nueva Categoria</span>
+    <span>Nueva Categoría</span>
     <div>
         <form style="display: flex;flex-direction: column;align-items: center;align-content: center;">
             <div *ngIf="uploadLink != ''" style="margin-top: 10px">
@@ -10,8 +10,9 @@
                 <input matInput [formControl]="NameInput">
             </mat-form-field>
             <mat-form-field  style="margin-top: 20px;">
-                <mat-label>Descripcion</mat-label>
-                <textarea matInput maxlength="250" [formControl]="DescriptInput" style="min-height: 150px;max-height: 300px;"></textarea>
+                <mat-label>Descripción</mat-label>
+                <textarea matInput #descripcion maxlength="500" [formControl]="DescriptInput" style="min-height: 150px;max-height: 300px;" placeholder="Solo se permiten 500 caracteres..."></textarea>
+                <mat-hint align="end">{{descripcion.value.length}} / 500</mat-hint>
             </mat-form-field>
             
             <div style="display: flex;flex-direction: column;">
@@ -23,14 +24,14 @@
                 </div>
                 <!-- Boton -->
                 <button id="save" mat-raised-button color="primary" style="margin-top: 30px;" (click)="createCat()">
-                    Registrar categoria
+                    Registrar categoría
                 </button>
             </div>
         </form>               
     </div>
 </div>
 <div *ngIf="process=='edit'">
-    <span>Editar Categoria</span>
+    <span>Editar Categoría</span>
     <div>
         <form style="display: flex;flex-direction: column;align-items: center;align-content: center;">
             <div *ngIf="uploadLink != ''" style="margin-top: 15px">
@@ -41,8 +42,9 @@
                 <input matInput [formControl]="NameInput">
             </mat-form-field>
             <mat-form-field  style="margin-top: 20px;">
-                <mat-label>Descripcion</mat-label>
-                <textarea matInput maxlength="100" [formControl]="DescriptInput" style="min-height: 180px;max-height: 300px;"></textarea>
+                <mat-label>Descripción</mat-label>
+                <textarea matInput #descripcion maxlength="500" [formControl]="DescriptInput" style="min-height: 180px;max-height: 300px;"></textarea>
+                <mat-hint align="end">{{descripcion.value.length}} / 500</mat-hint>
             </mat-form-field>
             
             <div style="display: flex;flex-direction: column;">
@@ -54,7 +56,7 @@
                 </div>
                 <!-- Boton -->
                 <button id="save" mat-raised-button color="primary" style="margin-top: 30px;" (click)="updateCat()">
-                    Actualizar categoria
+                    Actualizar categoría
                 </button>
             </div>
         </form>               

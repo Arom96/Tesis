@@ -10,7 +10,10 @@
                         <!-- Nombres -->
                         <mat-form-field appearance="legacy" color="primary" style="width: 300px;margin-top: 20px;">
                             <mat-label>Nombre</mat-label>
-                            <input matInput formControlName="namesControl" autocomplete="off">
+                            <input matInput (keyup)="validarCampos($event.target)" [(ngModel)]="clearname" type="text" formControlName="namesControl" autocomplete="off" required>
+                            <button *ngIf="clearname" matSuffix mat-icon-button aria-label="Clear" (click)="clearname=''">
+                                <mat-icon>close</mat-icon>
+                              </button>
                             <mat-error>
                                <strong>Solo se permiten letras. Sin espacios</strong>
                             </mat-error>
@@ -18,7 +21,10 @@
                         <!-- Apellidos -->
                         <mat-form-field appearance="legacy" color="primary" style="width: 300px;">
                             <mat-label>Apellido</mat-label>
-                            <input matInput formControlName="lastnamesControl" autocomplete="off">
+                            <input matInput (keyup)="validarCampos($event.target)" [(ngModel)]="clearlastname" type="text" formControlName="lastnamesControl" autocomplete="off" required>
+                            <button *ngIf="clearlastname" matSuffix mat-icon-button aria-label="Clear" (click)="clearlastname=''">
+                                <mat-icon>close</mat-icon>
+                              </button>
                             <mat-error>
                                <strong>Solo se permiten letras. Sin espacios</strong>
                             </mat-error>
@@ -26,7 +32,7 @@
                         <!-- Correo -->
                         <mat-form-field appearance="legacy" color="primary" style="width: 300px;">
                             <mat-label>Correo</mat-label>
-                            <input matInput formControlName="emailControl" autocomplete="off">
+                            <input matInput formControlName="emailControl" autocomplete="off" placeholder="Ej. nombre.apellido@epn.edu.ec" required>
                             <mat-error>
                                <strong>El email no es válido</strong>
                             </mat-error>
@@ -53,7 +59,7 @@
                         <!-- Boton -->
                         <button mat-flat-button style="margin-top: 30px;background: #A00000;color: white;" (click)="createUser()">
                             <!-- <img style="height: 20px;" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/> -->
-                            Regístrate
+                            Crear cuenta
                         </button>
                     </form>
                 </div>                

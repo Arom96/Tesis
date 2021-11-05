@@ -9,7 +9,8 @@
             </mat-form-field>
             <mat-form-field style="margin-top: 20px;">
                 <mat-label>Descripción</mat-label>
-                <textarea matInput maxlength="250" [formControl]="DescInput" style="min-height: 100px;"></textarea>
+                <textarea matInput #descripcion1 maxlength="500" [formControl]="DescInput" style="min-height: 100px;" placeholder="Solo se permiten 500 caracteres..."></textarea>
+                <mat-hint align="end">{{descripcion1.value.length}} / 500</mat-hint>
             </mat-form-field>
             <mat-form-field style="margin-top: 20px;">
                 <mat-label>Nivel</mat-label>
@@ -44,7 +45,8 @@
                 </mat-form-field>
                 <mat-form-field style="margin-top: 20px;">
                     <mat-label>Descripción</mat-label>
-                    <textarea matInput maxlength="500" [formControl]="DescInput" style="min-height: 100px;"></textarea>
+                    <textarea matInput #descripcion2 maxlength="500" [formControl]="DescInput" style="min-height: 100px;" placeholder="Solo se permiten 500 caracteres..."></textarea>
+                    <mat-hint align="end">{{descripcion2.value.length}} / 500</mat-hint>
                 </mat-form-field>
                 <mat-form-field style="margin-top: 20px;">
                     <mat-label>Nivel</mat-label>
@@ -143,7 +145,8 @@
             </mat-form-field>
             <mat-form-field style="margin-top: 20px;">
                 <mat-label>Descripción</mat-label>
-                <textarea matInput maxlength="500" [formControl]="DescInput" style="min-height: 100px;"></textarea>
+                <textarea matInput #descripcion3 maxlength="500" [formControl]="DescInput" style="min-height: 100px;" placeholder="Solo se permiten 500 caracteres..."></textarea>
+                <mat-hint align="end">{{descripcion3.value.length}} / 500</mat-hint>
             </mat-form-field>
             <mat-form-field style="margin-top: 20px;">
                 <mat-label>Nivel</mat-label>
@@ -181,7 +184,8 @@
                 </mat-form-field>
                 <mat-form-field style="margin-top: 20px;">
                     <mat-label>Descripción</mat-label>
-                    <textarea matInput maxlength="100" [formControl]="DescInput" style="min-height: 100px;"></textarea>
+                    <textarea matInput #descripcion4 maxlength="500" [formControl]="DescInput" style="min-height: 100px;" placeholder="Solo se permiten 500 caracteres..."></textarea>
+                    <mat-hint align="end">{{descripcion4.value.length}} / 500</mat-hint>
                 </mat-form-field>
                 <mat-form-field style="margin-top: 20px;">
                     <mat-label>Nivel</mat-label>
@@ -249,7 +253,7 @@
                     <strong>Importante:</strong>
                 </span>
                 <span>
-                    Verifique que toda la información es correcta antes de publicar.
+                    Verifique que toda la información sea correcta antes de publicar.
                 </span>
             </div>
             <!-- Boton -->
