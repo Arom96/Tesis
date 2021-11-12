@@ -8,6 +8,7 @@ import { AuthService } from '../services/auth.service';
 import { Toast } from '@ionic-native/toast/ngx';
 import { ToastController } from '@ionic/angular';
 import { LEADING_TRIVIA_CHARS } from '@angular/compiler/src/render3/view/template';
+import { ActionPerformed, PushNotifications, PushNotificationSchema, Token } from '@capacitor/push-notifications';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -71,6 +72,7 @@ export class SplashPage implements OnInit {
   @ViewChild('slidePrincipal') slides: IonSlides;
 
   error=false;
+  hide = true;
   noExist=false;
   pasar=false;
   usuarioexite=false;
@@ -152,7 +154,8 @@ export class SplashPage implements OnInit {
   }
 
   ngOnInit() {
-  }
+  
+}
 
   crearFormulario(){
     this.forma=this.fb.group({
@@ -166,6 +169,22 @@ export class SplashPage implements OnInit {
       password   :['',[Validators.required, Validators.pattern('(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$')]],
    }
    );}
+
+
+
+   validarCampos(campo){
+    console.log(campo)
+    let valor = campo.value;
+    // Verifica si el valor del campo (input) contiene numeros.
+    if(/\d/.test(valor)) {
+  
+    /* 
+     * Remueve los numeros que contiene el valor y lo establece
+     * en el valor del campo (input).
+     */
+      campo.value = valor.replace(/\d/g,'');
+    }
+  }
 
   cambiar(){
      
@@ -360,13 +379,10 @@ export class SplashPage implements OnInit {
   recuperarPass()
   {
     let mail = this.usuario.email
-    if (mail != undefined)
-    {
+    if (mail != undefined){
       this.authSvc.resetPassword(mail)
-    }
-    else
-    {
-      this.openToast('Debe ingresar su correo institucional')
+    }else{
+      this.openToast('Ingrese su correo para recuperar la contraseña')
     }    
   }
 

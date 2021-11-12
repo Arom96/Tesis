@@ -1,7 +1,8 @@
 <ion-content [fullscreen]="true" class="background">
-  <ion-grid  style="margin-top: 30px;">
-    <ion-row>
-      <ion-col class='cardRestaurant' *ngFor="let cat of Notifications; let i = index"  style="margin-top: 30px;">
+  <ion-grid  style="margin-top: 25px;">
+    <ion-row> 
+      <ion-searchbar showCancelButton="always" style="margin-top: 30px;" placeholder="Buscar"></ion-searchbar>     
+      <ion-col class='cardRestaurant' *ngFor="let cat of Notifications; let i = index"  style="margin-top: 20px;">
         <ion-card style="min-height: 100px;width: 93vw;margin: 2px;">
           <ion-card-content>
             <ion-card-title>
@@ -9,7 +10,10 @@
             </ion-card-title>
             <div style="text-align: right;">
               <span class="textCardRestaurant">{{ cat.cat }}</span>
-            </div>            
+            </div>   
+            <div style="text-align: left;">
+              <span class="textCardRestaurant">Creado por: {{ cat.autor }}</span>
+            </div>               
           </ion-card-content>
         </ion-card>
       </ion-col>

@@ -21,6 +21,7 @@ export class Upload {
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss']
 })
+
 export class Tab2Page {
   Categories = [];
   constructor(private auth: AuthService, private router: Router) 
@@ -30,10 +31,13 @@ export class Tab2Page {
       for(let s in result)
       {
         this.Categories.push({name: result[s]['name'], desc: result[s]['desc'], cover: result[s]['cover'], temas: result[s]['id']})
+        this.Categories[s].numero = result[s]['temas'].length      
       }
-      console.log(this.Categories);
+      this.Categories.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
     })
   }
+
+
 
   changeTab(cat)
   {

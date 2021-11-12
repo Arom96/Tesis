@@ -204,7 +204,7 @@ export class AuthService {
   }
 
   listNots(){
-    return this.afs.collection(`notifications`).valueChanges();
+    return this.afs.collection(`notifications`, ref => ref.orderBy('cat')).valueChanges();
 //   const userRef = this.afs.collection(`Category`);
 //   this.usu = userRef.snapshotChanges().pipe(map(a => {
 //     const data = a.payload.data() as Usuario;
@@ -219,9 +219,16 @@ export class AuthService {
 //   return this.usu ;
   }
 
+  actualizartoken(token: string, usuario: any){
+    return this.afs.doc(`users/${usuario.uid}`).update({
+      token
+    });
+
+  }
+
   resetPassword(mail)
   {
     this.afsAuth.sendPasswordResetEmail(mail)
-    this.openToast('Se envio un correo para reestablecer la contraseña');
+    this.openToast('Se envió un correo para reestablecer la contraseña');
   }
 }

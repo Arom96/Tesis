@@ -1,5 +1,5 @@
 {
-	"appId": "io.ionic.starter",
+	"appId": "com.company.educweb",
 	"appName": "educweb",
 	"webDir": "www",
 	"bundledWebRuntime": false,

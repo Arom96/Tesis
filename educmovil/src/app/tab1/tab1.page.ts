@@ -119,6 +119,20 @@ export class Tab1Page {
  );
   }
 
+  validarCampos(campo){
+    console.log(campo)
+    let valor = campo.value;
+    // Verifica si el valor del campo (input) contiene numeros.
+    if(/\d/.test(valor)) {
+  
+    /* 
+     * Remueve los numeros que contiene el valor y lo establece
+     * en el valor del campo (input).
+     */
+      campo.value = valor.replace(/\d/g,'');
+    }
+  }
+
   llenar(){
     if(this.usuario.fechanacimiento!= null){
       
