@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "443632761858",
+    "project_id": "educweb-esfot",
+    "storage_bucket": "educweb-esfot.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:443632761858:android:736a7fd21e1930fafa7b1b",
+        "android_client_info": {
+          "package_name": "com.company.educweb"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "443632761858-mgubrp5liiuccrvk7ioin1u9mrt8nuum.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfCbKhuR2mT_VmqQszs8Bf8rp7bUPPN_c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "443632761858-mgubrp5liiuccrvk7ioin1u9mrt8nuum.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

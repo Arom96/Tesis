@@ -43,14 +43,14 @@
                   <ion-list>
                       <ion-item>
                           <ion-label position="floating">Nombre</ion-label>
-                          <ion-input formControlName="nombre" type="text" required maxlength="20"></ion-input>
+                          <ion-input (keyup)="validarCampos($event.target)" formControlName="nombre" type="text" required maxlength="20"></ion-input>
                       </ion-item>
                       <!-- <mat-error *ngIf="forma.controls['nombre'].errors?.pattern">
                           {{errors.solotexto}}
                       </mat-error> -->
                       <ion-item>
                           <ion-label position="floating">Apellido</ion-label>
-                          <ion-input formControlName="apellido" type="text" required maxlength="20"></ion-input>
+                          <ion-input (keyup)="validarCampos($event.target)" formControlName="apellido" type="text" required maxlength="20"></ion-input>
                       </ion-item>
                       <!-- <mat-error *ngIf="forma.controls['apellido'].errors?.pattern">
                           {{errors.solotexto}}

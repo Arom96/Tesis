@@ -16,7 +16,6 @@ import { Toast } from '@ionic-native/toast/ngx';
 import { environment } from 'src/environments/environment';
 import { Camera } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file/ngx';
-import { FCM } from '@ionic-native/fcm/ngx';
 import {FileTransfer} from '@ionic-native/file-transfer/ngx';
 import {FileOpener} from '@ionic-native/file-opener/ngx'
 
@@ -120,7 +119,6 @@ import { ForegroundService } from '@ionic-native/foreground-service/ngx';
   ],
   providers: [
     Camera,
-    FCM,
     File,
     FileTransfer,
     FileOpener,
