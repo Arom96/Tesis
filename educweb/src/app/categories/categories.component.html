@@ -20,17 +20,17 @@
     <mat-divider style="margin-bottom: 5px;margin-top: 5px;background: white;"></mat-divider>
     <div style="display: flex;flex-direction: column;">
       <button mat-icon-button routerLink='/profile' style="color: white;">
-        <mat-icon class="icono" style="color: white;margin-right: 10px;margin-left: 10px;">badge</mat-icon>Mi Cuenta
+        <mat-icon class="icono" style="color: white;margin-right: 10px;margin-left: 10px;">person</mat-icon>Mi Cuenta
       </button>
       <div *ngIf="usrRole != 'admin'">
         <button mat-icon-button routerLink='/categories' style="color: white;font-weight: bold;font-size: 20px;">
-          <mat-icon class="icono" style="color: white;margin-right: 10px;margin-left: 10px;">dashboard_customize
+          <mat-icon class="icono" style="color: white;margin-right: 10px;margin-left: 10px;">content_paste
           </mat-icon>Categorias
         </button>
       </div>
       <div *ngIf="usrRole != 'admin'">
         <button mat-icon-button routerLink='/courses' style="color: white;">
-          <mat-icon class="icono" style="color: white;margin-right: 10px;margin-left: 10px;">grading</mat-icon>Contenido
+          <mat-icon class="icono" style="color: white;margin-right: 10px;margin-left: 10px;">source</mat-icon>Contenido
         </button>
       </div>
       <div *ngIf="usrRole == 'admin'">
@@ -55,16 +55,22 @@
       </div>
     </div>
   </div>
+  
   <div *ngIf="catDetailsSelected == 'initial'"
     style="display: flex;flex-direction: column;align-items: center;padding: 15px;margin: 5px;border-radius: 15px;width: 100%;overflow: auto;">
+    <div style="display: flex;justify-content: left;align-content: left;margin: 10px;">
+      <mat-icon>info</mat-icon>
+      <span style="padding: 4px;border: 1px currentColor;border-radius: 5px;background: #90caf9;">
+         En este módulo podrás crear nuevas categorías.
+      </span>
+  </div>
     <div style="position: absolute; right: 0;margin: 25px;z-index: 999;top: 43px;">
       <button mat-button (click)="registerNewCategory()" style="background-color: #A40000;color: white;">
         <mat-icon>add</mat-icon>
         Nueva
-      </button>
+      </button>     
     </div>
-    <div style="margin-top: -10px;margin-bottom: 10px;font-size: 19px;font-weight: bold;"><span>Estas son nuestras
-        categorías</span></div>
+    <div style="margin-top: -10px;margin-bottom: 10px;font-size: 19px;font-weight: bold;"><br><span>Categorías Registradas</span></div>
     <div fxLayout="row" fxLayout.lt-md="column" fxLayoutWrap="nowrap" fxLayoutGap="20px"
       style="display: flex;flex-direction: row;flex-wrap: wrap;gap: 10px;justify-content: space-around;">
       <div *ngFor="let categoria of Categories">
@@ -115,5 +121,5 @@
   <!-- <div *ngIf="isLogged && User.role == 'profesor' && User.enabled">
       <button mat-menu-item routerLink='courses'>Cursos</button>
     </div> -->
-  <button mat-menu-item (click)="logOutUser()">Cerrar Sesión</button>
+  <button mat-menu-item (click)="logOutUser()"> Cerrar Sesión </button>
 </mat-menu>

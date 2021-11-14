@@ -18,14 +18,14 @@
         </div>
         <mat-divider style="margin-bottom: 5px;margin-top: 5px;background: white;"></mat-divider>
         <div style="display: flex;flex-direction: column;">
-          <button mat-icon-button routerLink='/profile' style="color: white;"><mat-icon class="icono" style="color: white;margin-right: 10px;margin-left: 10px;">badge</mat-icon>Mi Cuenta</button>
+          <button mat-icon-button routerLink='/profile' style="color: white;"><mat-icon class="icono" style="color: white;margin-right: 10px;margin-left: 10px;">person</mat-icon>Mi Cuenta</button>
           <div *ngIf="usrRole != 'admin'">            
-            <button mat-icon-button routerLink='/categories' style="color: white;"><mat-icon class="icono" style="color: white;margin-right: 10px;margin-left: 10px;">dashboard_customize</mat-icon>Categorías</button>
-            <button mat-icon-button routerLink='/courses' style="color: white;"><mat-icon class="icono" style="color: white;margin-right: 10px;margin-left: 10px;">grading</mat-icon>Contenido</button>
+            <button mat-icon-button routerLink='/categories' style="color: white;"><mat-icon class="icono" style="color: white;margin-right: 10px;margin-left: 10px;">content_paste</mat-icon>Categorías</button>
+            <button mat-icon-button routerLink='/courses' style="color: white;"><mat-icon class="icono" style="color: white;margin-right: 10px;margin-left: 10px;">source</mat-icon>Contenido</button>
           </div>
           
           <div *ngIf="usrRole == 'admin'">
-            <button mat-icon-button routerLink='/approval' style="color: white;font-weight: bold;font-size: 20px;"><mat-icon class="icono" style="color: white;margin-right: 10px;margin-left: 10px;">grading</mat-icon>Ver Peticiones</button>
+            <button mat-icon-button routerLink='/approval' style="color: white;font-weight: bold;font-size: 20px;"><mat-icon class="icono" style="color: white;margin-right: 10px;margin-left: 10px;">rule</mat-icon>Ver Peticiones</button>
           </div>
         </div>   
       </div> 
@@ -74,7 +74,7 @@
                 <th mat-header-cell *matHeaderCellDef style="color: grey;font-size: 14px;"> Alertar </th>
                 <td mat-cell *matCellDef="let reqList" style="color: grey; font-size: 12px;"> 
                     <button mat-mini-fab (click)="AlertRequests(reqList)" style="background-color: #FFEA00;color: white;">
-                         <mat-icon>report_problem</mat-icon>
+                         <mat-icon>warning_amber</mat-icon>
                     </button> 
                 </td>
             </ng-container>
@@ -84,7 +84,7 @@
                 <th mat-header-cell *matHeaderCellDef style="color: grey;font-size: 14px;"> Eliminar </th>
                 <td mat-cell *matCellDef="let reqList" style="color: grey; font-size: 12px;"> 
                     <button mat-mini-fab (click)="DenyRequests(reqList)" style="background-color: #A00000;color: white;">
-                         <mat-icon>cancel</mat-icon>
+                         <mat-icon>clear</mat-icon>
                     </button> 
                 </td>
                 
@@ -111,5 +111,5 @@
     <!-- <div *ngIf="isLogged && User.role == 'profesor' && User.enabled">
       <button mat-menu-item routerLink='courses'>Cursos</button>
     </div> -->
-    <button mat-menu-item (click)="logOutUser()">Cerrar Sesión</button>
+    <button mat-menu-item (click)="logOutUser()"> Cerrar Sesión </button>
 </mat-menu>

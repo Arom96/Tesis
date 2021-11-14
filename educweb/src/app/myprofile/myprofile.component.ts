@@ -34,11 +34,11 @@ export class MyprofileComponent implements OnInit {
   options = new FormGroup({
     namesControl: new FormControl('', [
       Validators.required,
-      Validators.pattern('^[a-zA-ZÀ-ÿ\u00f1\u00d1]+ (\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$')
+      Validators.pattern('^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$')
     ]),
     lastnamesControl: new FormControl('', [
       Validators.required,
-      Validators.pattern('^[a-zA-ZÀ-ÿ\u00f1\u00d1]+ (\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$')
+      Validators.pattern('^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$')
     ]),
     roleControl: new FormControl(''),
     emailControl: new FormControl(''),
@@ -91,18 +91,23 @@ export class MyprofileComponent implements OnInit {
     
   }
 
-  validarCampos(campo){
+  validarCamposn(campo){
     console.log(campo)
     let valor = campo.value;
-    // Verifica si el valor del campo (input) contiene numeros.
     if(/\d/.test(valor)) {
-  
-    /* 
-     * Remueve los numeros que contiene el valor y lo establece
-     * en el valor del campo (input).
-     */
-      campo.value = valor.replace(/\d/g,'');
-    }
+      this.options.get('namesControl').setValue(valor.replace(/\d/g,' ').trim());
+      
+    } 
+
+  }
+
+  validarCamposa(campo){
+    console.log(campo)
+    let valor = campo.value;
+    if(/\d/.test(valor)) {
+      this.options.get('lastnamesControl').setValue(valor.replace(/\d/g,' ').trim());
+    } 
+
   }
 
   //cambia la navegacion a login/register con parametros

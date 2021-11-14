@@ -10,6 +10,7 @@ import { DialogData } from '../categories/categories.component';
 import { Upload } from '../login/login.component';
 import { AuthServiceService } from '../Services/auth-service.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import Swal from 'sweetalert2'
 // "ngx-image-cropper": "^3.0.3",
 
 @Component({
@@ -58,7 +59,7 @@ export class CoursesComponent implements OnInit {
       }
       this.Categories.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
       this.usrRole = this.Appc.User.role;
-      console.log(this.Categories);
+      // console.log(this.Categories);
       this.usrID = this.Appc.User.uid
     })
   }
@@ -82,7 +83,7 @@ export class CoursesComponent implements OnInit {
   }
 
   openConfirmDelete(task, tema) {
-    console.log(task);
+    // console.log(task);
     if (this.usrID == task.uid) 
     {
       const dialogRef = this.dialog.open(ConfirmDialog, {
@@ -162,7 +163,7 @@ export class CoursesComponent implements OnInit {
 
   openCreateLectura(padre) {
 
-    console.log(padre);
+    // console.log(padre);
     
 
     for (let i = 0; i < this.selecedCat['temas'].length; i++) {
@@ -172,7 +173,7 @@ export class CoursesComponent implements OnInit {
       }
     }
 
-    console.log(this.listalecturas);
+    // console.log(this.listalecturas);
     
     
     const dialogRef = this.dialog.open(NewLecturaDialog, {
@@ -206,8 +207,8 @@ export class CoursesComponent implements OnInit {
   }
 
   OpenEditLectura(padre, lecturas, index) {
-    console.log('Edit:', padre, index);
-    console.log('usrID:', this.usrID);
+    // console.log('Edit:', padre, index);
+    // console.log('usrID:', this.usrID);
     if (this.usrID == padre.uid) 
     {
       const dialogRef = this.dialog.open(NewLecturaDialog, {
@@ -218,7 +219,7 @@ export class CoursesComponent implements OnInit {
       dialogRef.afterClosed().subscribe(result => {
         if (result != undefined) {
           if (this.usrID == padre.uid) {
-            console.log(result)
+            // console.log(result)
             this.editLectura(
               lecturas,
               result.name,
@@ -250,7 +251,7 @@ export class CoursesComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result != undefined) {
-        console.log(result)
+        // console.log(result)
         this.createPrueba(padre, result.name, result.payload, this.usrID)
         this.snack.open('Prueba agregada con éxito', '', { duration: 2000 })
       }
@@ -258,7 +259,7 @@ export class CoursesComponent implements OnInit {
   }
 
   openEditPrueba(prueba, tema_nombre, index) {
-    console.log(prueba)
+    // console.log(prueba)
     if (this.usrID == prueba.uid) 
     {
       const dialogRef = this.dialog.open(NewPruebaDialog, {
@@ -268,7 +269,7 @@ export class CoursesComponent implements OnInit {
 
       dialogRef.afterClosed().subscribe(result => {
         if (result != undefined) {
-          console.log(result)
+          // console.log(result)
           //this.createPrueba(padre, result.name, result.payload)
           this.updatePrueba(tema_nombre, result.name, result.payload, this.usrID, index);
           this.snack.open('Prueba actualizada con éxito', '', { duration: 2000 })
@@ -294,7 +295,7 @@ export class CoursesComponent implements OnInit {
 
     }
 
-    console.log(category);
+    // console.log(category);
     this.selectedTema = [];
     this.selectedID = category.id;
     this.selecedCat = category;
@@ -313,7 +314,7 @@ export class CoursesComponent implements OnInit {
     //   });
     // }
 
-    console.log('Temas:', this.selectedTema);
+    // console.log('Temas:', this.selectedTema);
 
   }
 
@@ -323,8 +324,8 @@ export class CoursesComponent implements OnInit {
 
   createTema(name) {
 
-    if (name.replace(/\s/g, '').length !=0) {
-      console.log(this.selecedCat);
+    if (name.length != 0) {
+      // console.log(this.selecedCat);
       let id = this.selecedCat['id'];
       let temas = this.selecedCat['temas']
       temas.push({ 'lecturas': [], 'pruebas': [], 'nombre': name })
@@ -355,7 +356,7 @@ export class CoursesComponent implements OnInit {
         })
       }
     }
-    console.log(temas);
+    // console.log(temas);
     this.auth.pushNewTema(id, temas);
     let current_datetime = new Date();
     let formatted_date = current_datetime.getFullYear() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate() + " " + current_datetime.getHours() + ":" + current_datetime.getMinutes() + ":" + current_datetime.getSeconds() 
@@ -395,7 +396,7 @@ export class CoursesComponent implements OnInit {
       }
 
     }
-    console.log(temas);
+    // console.log(temas);
     this.auth.pushNewTema(id, temas);
     let current_datetime = new Date();
     let formatted_date = current_datetime.getFullYear() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate() + " " + current_datetime.getHours() + ":" + current_datetime.getMinutes() + ":" + current_datetime.getSeconds() 
@@ -421,12 +422,12 @@ export class CoursesComponent implements OnInit {
       }
 
     }
-    console.log(temas);
+    // console.log(temas);
     this.auth.pushNewTema(id, temas);
   }
 
   viewPrueba(prueba) {
-    console.log(prueba);
+    // console.log(prueba);
     const dialogRef = this.dialog.open(ViewPruebaDialog, {
       width: '100vw',
       data: { data: prueba, process: 'new' }
@@ -434,7 +435,7 @@ export class CoursesComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result != undefined) {
-        console.log(result)
+        // console.log(result)
       }
     })
   }
@@ -542,6 +543,7 @@ export class NewLecturaDialog implements OnInit {
   process;
   uploading = false;
   usrUID;
+  disableurl = false;
   public NameInput = new FormControl();
   public DescInput = new FormControl();
   public levelControl = new FormControl();
@@ -553,7 +555,7 @@ export class NewLecturaDialog implements OnInit {
   dataImages: any[] = [];
   public urlYouTubeInput = new FormControl();
 
-  // varables para la lista de lecturas
+  // variables para la lista de lecturas
   listalecturas: any[];
   comprobarlectura: boolean = false;
 
@@ -567,7 +569,7 @@ export class NewLecturaDialog implements OnInit {
   ) {
     if (this.data["usr"] != undefined) {
       // this.user = this.data["usr"];
-      console.log(this.data);
+      // console.log(this.data);
     }
     this.process = this.data.process;
   }
@@ -577,22 +579,40 @@ export class NewLecturaDialog implements OnInit {
   isEditable = false;
 
   ngOnInit() {
-
-
-    this.listalecturas = this.data['lecturas'];    
+    
+    this.listalecturas = this.data['lecturas'];   
+    // lista ... = lecturas 
+    // console.log(this.listalecturas);
 
     if (this.process == 'edit') {
-      console.log('EDIT:', this.process, this.data);
+
+      this.listalecturas = [{
+        doc: '',
+        nombre: '',
+        level: '',
+        desc: '',
+        images: '',
+        url_youtube: '',
+        uid: '',
+        autor: ''
+      }];
+
+      // recibo un objeto y lo guardo en la posicion 0 del array
+      // console.log('EDIT:', this.process, this.data);
       this.NameInput.setValue(this.data['data']['nombre']);
       this.DescInput.setValue(this.data['data']['desc']);
       this.levelControl.setValue(this.data['data']['level']);
       this.uploadLink = this.data['data']['doc'];
       const url_youtube = this.data['data']['url_youtube'] ? this.data['data']['url_youtube'] : '';
-      console.log('url_youtube', url_youtube);
+      // console.log('url_youtube', url_youtube);
       this.urlYouTubeInput.setValue(url_youtube);
       const dataIMGs = this.data['data']['images'] ? this.data['data']['images'] : [];
-      console.log('dataIMGs', dataIMGs);
+      // console.log('dataIMGs', dataIMGs);
       this.dataImages = [...dataIMGs];
+      this.listalecturas[0] = this.data['data'];
+      // this.listalecturas[0] = 'prueba';
+
+      // console.log(this.listalecturas);      
     }
 
     this.firstFormGroup = this._formBuilder.group({
@@ -617,8 +637,9 @@ export class NewLecturaDialog implements OnInit {
       url.subscribe(result => {
         this.uploading = false;
         (document.getElementById("save") as HTMLButtonElement).disabled = false;
-        console.log(result);
+        // console.log(result);
         this.uploadLink = result;
+        this.snack.open("Documento cargado con éxito", '', { duration: 3500 })
       })
     });
 
@@ -639,7 +660,11 @@ export class NewLecturaDialog implements OnInit {
         this.handleInputChange(file); //turn into base64
 
       }else{
-        alert(`El tamaño de las imágenes debe ser de 500 x 500 o tener un peso menor a ${SIZE} KB`);
+        Swal.fire(
+          'Solo se permiten imágenes de 500 x 500',
+          'Con un peso menor a 6MB',
+          'warning'
+        )
       }
       
     } else {
@@ -675,28 +700,16 @@ export class NewLecturaDialog implements OnInit {
   // ========================================================================================
 
   createLectura() {
+
     let name = this.NameInput.value;
     let desc = this.DescInput.value;
     let level = this.levelControl.value;
 
-    if (this.uploadLink == '' || this.NameInput.value.trim().length == 0) {
+    if (this.uploadLink == '' || this.NameInput.value.trim().length == 0 ) {
       this.snack.open('Revise que todos los campos esten llenos', '', { duration: 2500 });
     } else {
-
-      for (let i = 0; i < this.listalecturas.length; i++) {        
-  
-        if ( name.trim().toLowerCase() == this.listalecturas[i].nombre.toLowerCase()) {
-          this.comprobarlectura = true;
-          break;
-        }else{
-          this.comprobarlectura = false;
-        }
-      }
-  
-      if (this.comprobarlectura) {
-        this.snack.open("La lectura ya existe por favor verifique he intente nuevamente", '', { duration: 3500 })
-      }else{
-
+      
+      if(this.process == 'edit'){
         this.dialogRef.close({
           'file': this.uploadLink,
           'name': name,
@@ -704,8 +717,28 @@ export class NewLecturaDialog implements OnInit {
           'level': level,
           'images': this.dataImages,
           'url_youtube': this.urlYouTubeInput.value
-        });
-        
+        }); 
+      }else{
+        for (let i = 0; i < this.listalecturas.length; i++) {  
+          if ( name.trim().toLowerCase() == this.listalecturas[i].nombre.toLowerCase()) {
+            this.comprobarlectura = true;
+            break;
+          }else{
+            this.comprobarlectura = false;
+          }
+        }
+        if (this.comprobarlectura) {
+          this.snack.open("La lectura ya existe por favor verifique he intente nuevamente", '', { duration: 3500 })
+        }else{
+          this.dialogRef.close({
+            'file': this.uploadLink,
+            'name': name,
+            'desc': desc,
+            'level': level,
+            'images': this.dataImages,
+            'url_youtube': this.urlYouTubeInput.value
+          }); 
+        }
       }
 
     }    
@@ -714,6 +747,33 @@ export class NewLecturaDialog implements OnInit {
   goToLink(url: string) {
     window.open(url, "_blank");
   }
+
+  matchYoutubeUrl(url) {
+    var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    var matches = url.match(p);
+    if(matches){
+        return matches[1];
+    }
+    return false;
+}
+
+
+  check(sender){
+    var url = this.urlYouTubeInput.value;
+    var id = this.matchYoutubeUrl(url);
+    if(id){
+      this.disableurl = true;
+    }else{
+      Swal.fire(
+        'URL no válida',
+        'Inserta un enlace de YOUTUBE válido',
+        'warning'
+      )
+      this.urlYouTubeInput.setValue('');
+      this.disableurl = false;
+
+    }
+}
 
 }
 

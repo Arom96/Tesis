@@ -101,13 +101,13 @@
                 <div style="display: flex;flex-direction: column;">
                     <mat-form-field style="margin-top: 20px;">
                         <mat-label>Copiar & Pegar URL YouTube:</mat-label>
-                        <input matInput type="url" [formControl]="urlYouTubeInput">
+                        <input matInput type="url" [formControl]="urlYouTubeInput" (change)="check()">
                     </mat-form-field>
                 </div>
             </div>
             <div>
                 <button mat-button matStepperPrevious>Atras</button>
-                <button mat-button matStepperNext>Siguiente</button>
+                <button mat-button matStepperNext [disabled]="!disableurl">Siguiente</button>
             </div>
         </mat-step>
         <mat-step label="Guardar Lectura">
@@ -180,7 +180,7 @@
             <div style="display: flex;flex-direction: column;">
                 <mat-form-field style="margin-top: 20px;">
                     <mat-label>Nombre</mat-label>
-                    <input matInput [formControl]="NameInput">
+                    <input matInput [formControl]="NameInput" readonly>
                 </mat-form-field>
                 <mat-form-field style="margin-top: 20px;">
                     <mat-label>Descripción</mat-label>
@@ -238,13 +238,13 @@
                 <div style="display: flex;flex-direction: column;">
                     <mat-form-field style="margin-top: 20px;">
                         <mat-label>Copiar & Pegar URL YouTube:</mat-label>
-                        <input matInput [formControl]="urlYouTubeInput">
+                        <input matInput [formControl]="urlYouTubeInput" (change)="check()">
                     </mat-form-field>
                 </div>
             </div>
             <div>
                 <button mat-button matStepperPrevious>Atras</button>
-                <button mat-button matStepperNext>Siguiente</button>
+                <button mat-button matStepperNext [disabled]="urlYouTubeInput.value.length == 0">Siguiente</button>
             </div>
         </mat-step>
         <mat-step label="Guardar Lectura">

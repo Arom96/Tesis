@@ -27,7 +27,7 @@ export class AuthServiceService {
   resetPassword(mail)
   {
     this.afsAuth.sendPasswordResetEmail(mail)
-    this.snack.open('Se envió un correo para reestablecer la contraseña', '', {duration: 2500})
+    this.snack.open('Se envió un correo para reestablecer la contraseña', '', {duration: 3500})
   }
 
   createMailUser(mail, pass, name, lastname, roles, cedula?:'', celularm?:'', dir?:'', url?:'', birthdate?:''){

@@ -18,9 +18,9 @@
         </div>
         <mat-divider style="margin-bottom: 5px;margin-top: 5px;background: white;"></mat-divider>
         <div style="display: flex;flex-direction: column;">
-          <button mat-icon-button routerLink='/profile' style="color: white;"><mat-icon class="icono" style="color: white;margin-right: 10px;margin-left: 10px;">badge</mat-icon>Mi Cuenta</button>
-          <button mat-icon-button routerLink='/categories' style="color: white;"><mat-icon class="icono" style="color: white;margin-right: 10px;margin-left: 10px;">dashboard_customize</mat-icon>Categorías</button>
-          <button mat-icon-button routerLink='/courses' style="color: white;"><mat-icon class="icono" style="color: white;margin-right: 10px;margin-left: 10px;">grading</mat-icon>Contenido</button>
+          <button mat-icon-button routerLink='/profile' style="color: white;"><mat-icon class="icono" style="color: white;margin-right: 10px;margin-left: 10px;">person</mat-icon>Mi Cuenta</button>
+          <button mat-icon-button routerLink='/categories' style="color: white;"><mat-icon class="icono" style="color: white;margin-right: 10px;margin-left: 10px;">content_paste</mat-icon>Categorías</button>
+          <button mat-icon-button routerLink='/courses' style="color: white;"><mat-icon class="icono" style="color: white;margin-right: 10px;margin-left: 10px;">source</mat-icon>Contenido</button>
         </div>        
         <!-- No mostremos esto -->
         <div style="display: none;">
@@ -115,5 +115,5 @@
 
 <mat-menu #menu="matMenu">
     <button mat-menu-item routerLink='/profile'>Mi Cuenta</button>
-    <button mat-menu-item (click)="logOutUser()">Cerrar Sesión</button>
+    <button mat-menu-item (click)="logOutUser()">Cerrar Sesión </button>
   </mat-menu>

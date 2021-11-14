@@ -134,18 +134,23 @@ export class LoginComponent implements OnInit {
   }
 
 
-  validarCampos(campo){
+  validarCamposn(campo){
     console.log(campo)
     let valor = campo.value;
-    // Verifica si el valor del campo (input) contiene numeros.
     if(/\d/.test(valor)) {
-  
-    /* 
-     * Remueve los numeros que contiene el valor y lo establece
-     * en el valor del campo (input).
-     */
-      campo.value = valor.replace(/\d/g,'');
-    }
+      this.options.get('namesControl').setValue(valor.replace(/\d/g,' ').trim());
+      
+    } 
+
+  }
+
+  validarCamposa(campo){
+    console.log(campo)
+    let valor = campo.value;
+    if(/\d/.test(valor)) {
+      this.options.get('lastnamesControl').setValue(valor.replace(/\d/g,' ').trim());
+    } 
+
   }
 
   changeSelection(selection){
