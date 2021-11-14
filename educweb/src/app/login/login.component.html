@@ -10,7 +10,7 @@
                         <!-- Nombres -->
                         <mat-form-field appearance="legacy" color="primary" style="width: 300px;margin-top: 20px;">
                             <mat-label>Nombre</mat-label>
-                            <input matInput (keyup)="validarCampos($event.target)" [(ngModel)]="clearname" type="text" formControlName="namesControl" autocomplete="off" required>
+                            <input matInput (keyup)="validarCamposn($event.target)" [(ngModel)]="clearname" type="text" formControlName="namesControl" autocomplete="off" required>
                             <button *ngIf="clearname" matSuffix mat-icon-button aria-label="Clear" (click)="clearname=''">
                                 <mat-icon>close</mat-icon>
                               </button>
@@ -21,7 +21,7 @@
                         <!-- Apellidos -->
                         <mat-form-field appearance="legacy" color="primary" style="width: 300px;">
                             <mat-label>Apellido</mat-label>
-                            <input matInput (keyup)="validarCampos($event.target)" [(ngModel)]="clearlastname" type="text" formControlName="lastnamesControl" autocomplete="off" required>
+                            <input matInput (keyup)="validarCamposa($event.target)" [(ngModel)]="clearlastname" type="text" formControlName="lastnamesControl" autocomplete="off" required>
                             <button *ngIf="clearlastname" matSuffix mat-icon-button aria-label="Clear" (click)="clearlastname=''">
                                 <mat-icon>close</mat-icon>
                               </button>
@@ -75,7 +75,7 @@
                         <mat-label>Correo</mat-label>
                         <input matInput formControlName="emailControl">
                         <mat-error>
-                           <strong>Correo incorrecto</strong>
+                           <strong>Ingrese su correo</strong>
                         </mat-error>
                     </mat-form-field>                      
                     <!-- Contraseña -->

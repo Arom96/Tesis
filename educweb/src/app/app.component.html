@@ -26,7 +26,10 @@
       </div>
     </div>
     <div *ngIf="router.url == '/dashboard' || router.url == '/categories' || router.url == '/courses' || router.url == '/profile' || router.url == '/carnet-upload' || router.url == '/approval'">
-      <button mat-icon-button style="width: auto; height: auto;" (click)="logOutUser()">Cerrar Sesión</button>
+      
+      <button mat-icon-button style="width: auto; height: auto;" (click)="logOutUser()">
+        Cerrar Sesión <span class="material-icons">logout</span></button>
+      
     </div>
     
   </div>
