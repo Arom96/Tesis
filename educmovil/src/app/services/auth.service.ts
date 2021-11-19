@@ -120,7 +120,8 @@ export class AuthService {
         dir: '',
         role: roles,
         imgUrl: '',
-        enabled: false
+        enabled: false,
+        token: '',
     }
     return this.http.post(this.url, body).toPromise()
     .catch(msg =>{

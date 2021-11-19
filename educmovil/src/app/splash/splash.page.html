@@ -57,10 +57,12 @@
                                     <ion-item appearance="legacy" class="tamanioc">
                                         <ion-label position="floating">Contraseña</ion-label>
                                         <ion-input matInput [type]="hide ? 'password' : 'text'" name="password" [(ngModel)]="usuariolog.password" #password="ngModel" required>
-                                            <button item-right mat-icon-button matSuffix (click)="hide= !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" style="position: absolute;right: 0;">
-                                                <ion-icon  [name]="hide ?'eye-off':'eye'"></ion-icon>        
-                                            </button>
+                                            
                                         </ion-input>
+                                        <button type="button" item-right mat-icon-button matSuffix (click)="hide= !hide" style="position: absolute;right: 0;">
+                                            <ion-icon  [name]="hide ?'eye-off':'eye'"></ion-icon>        
+                                        </button>
+                                        
                                         <!-- <mat-error class="text-danger" *ngIf="password.invalid && password.touched">Contraseña requerida</mat-error> -->
                                     </ion-item>                                   
                                     <mat-error *ngIf="password.invalid && password.touched">Contraseña requerida</mat-error>
@@ -113,13 +115,13 @@
 
                                     <ion-item>
                                         <ion-label position="floating">Nombre</ion-label>
-                                        <ion-input (keyup)="validarCampos($event.target)" [(ngModel)]="usuario.nombre" formControlName="nombre" type="text" required></ion-input>
+                                        <ion-input [(ngModel)]="usuario.nombre" formControlName="nombre" type="text" required></ion-input>
                                     </ion-item>
                                     <mat-error *ngIf="forma.controls['nombre'].errors?.pattern"> {{errors.name}}</mat-error>
 
                                     <ion-item>
                                         <ion-label position="floating">Apellido</ion-label>
-                                        <ion-input (keyup)="validarCampos($event.target)" [(ngModel)]="usuario.apellido" formControlName="apellido" type="text" required></ion-input>
+                                        <ion-input [(ngModel)]="usuario.apellido" formControlName="apellido" type="text" required></ion-input>
                                     </ion-item>
                                     <mat-error *ngIf="forma.controls['apellido'].errors?.pattern"> {{errors.apellido}}</mat-error>
 
@@ -159,10 +161,11 @@
                                     <ion-item>
                                         <ion-label position="floating">Contraseña</ion-label>
                                         <ion-input [type]="hide ? 'password' : 'text'" [(ngModel)]="usuario.password" formControlName="password" required>
-                                            <button item-right mat-icon-button matSuffix (click)="hide= !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" style="position: absolute;right: 0;">
-                                                <ion-icon  [name]="hide ?'eye-off':'eye'"></ion-icon>        
-                                            </button>
+                                            
                                         </ion-input>
+                                        <button type="button" item-right mat-icon-button matSuffix (click)="hide= !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" style="position: absolute;right: 0;">
+                                            <ion-icon  [name]="hide ?'eye-off':'eye'"></ion-icon>        
+                                        </button>
                                     </ion-item>
                                     <mat-error *ngIf="forma.controls['password'].errors?.pattern">Mínimo 8 caracteres incluyendo al menos una mayúscula una minúscula y un número </mat-error>
                                 </ion-list>
