@@ -31,7 +31,7 @@
                   </div>
                 </div>
               </ion-card-title>
-              <hr style="background: white;">
+              <hr style="background: #9E9E9E;">
               <div>
               </div>
               <div>
@@ -52,7 +52,7 @@
                 <ion-button shape="round" expand="full" fill="solid" color="tertiary" (click)="openDoc(cat.doc)">
                   Ver Documento
                 </ion-button>
-                <ion-button shape="round" expand="full" fill="solid" color="tertiary" (click)="openDoc(cat.url_youtube)">
+                <ion-button shape="round" expand="full" fill="solid" color="tertiary" *ngIf="cat.url_youtube.length>0" (click)="openDoc(cat.url_youtube)">
                   Ver Video
                 </ion-button>
               </div>
@@ -65,7 +65,7 @@
             <ion-card-content>
               <ion-card-title style="text-align: center;">            
               <p style="text-align: center;font-size: 22px;color: black;margin-bottom: 10px;">Prueba tus conocimientos</p>
-              <hr style="background: white;margin: 20px;">
+              <hr style="background: #9E9E9E;margin: 20px;">
               <div *ngIf="pruebas != []">
                 <div *ngFor="let test of pruebas; let i = index">
                   <div>

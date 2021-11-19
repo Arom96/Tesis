@@ -171,21 +171,6 @@ export class SplashPage implements OnInit {
    );}
 
 
-
-   validarCampos(campo){
-    console.log(campo)
-    let valor = campo.value;
-    // Verifica si el valor del campo (input) contiene numeros.
-    if(/\d/.test(valor)) {
-  
-    /* 
-     * Remueve los numeros que contiene el valor y lo establece
-     * en el valor del campo (input).
-     */
-      campo.value = valor.replace(/\d/g,'');
-    }
-  }
-
   cambiar(){
      
     this.promo=false;
@@ -261,7 +246,7 @@ export class SplashPage implements OnInit {
   
   }
 
-  async register(forma:FormGroup){
+  /*async register(forma:FormGroup){
     if(this.forma.invalid){
       console.log('entra');
   
@@ -305,7 +290,7 @@ export class SplashPage implements OnInit {
           } 
         
         }  
-  }
+      }*/
 
   async openToast(message) {  
     const toast = await this.toastCtrl.create({  

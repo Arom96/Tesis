@@ -11,7 +11,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class Tab7Page implements OnInit {  
   public preguntas = [];
-  correctas: string = '0';
+  correctas: any = '0';
   incorrectas: string = '0';
 
   constructor(private router: Router, 
@@ -81,13 +81,14 @@ export class Tab7Page implements OnInit {
   }
 
   async showResults(){
-    console.log(this.correctas);
-    console.log(this.incorrectas);
+    //console.log(this.correctas);
+    //console.log(this.incorrectas);
 
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'Tu puntuación es:',
-      message: this.correctas + ' acierto(s) de ' + (this.preguntas.push(Number(Array[0]))-1),
+      message: ((this.correctas)*10) + ' / ' + (this.preguntas.push(Number(Array[0]))-1)*10  + 
+      ' Por ' + this.correctas + ' respuesta(s) correcta(s)' + ' de ' + (this.preguntas.push(Number(Array[0]))-2) + ' preguntas',
       buttons: [
         {
           text: 'Finalizar',

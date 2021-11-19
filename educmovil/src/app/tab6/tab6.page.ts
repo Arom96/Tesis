@@ -19,7 +19,7 @@ export class Tab6Page implements OnInit {
     ) { }
 
   ngOnInit() {
-    console.log('carga')
+    //console.log('carga')
     this.name = this.activatedRoute.snapshot.paramMap.get('name');
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
     let buffer = eval(this.activatedRoute.snapshot.paramMap.get('payload'));
@@ -27,7 +27,7 @@ export class Tab6Page implements OnInit {
     {
       this.preguntas.push({primera: buffer[s]['1'], segunda: buffer[s]['2'], tercera: buffer[s]['3'], cuarta: buffer[s]['4'], pregunta: buffer[s]['pregunta'], correcta: buffer[s]['correcta']})
     }
-    console.log(this.preguntas)
+    //console.log(this.preguntas)
   }
 
   showResults(){
@@ -38,7 +38,7 @@ export class Tab6Page implements OnInit {
     {
       let resp = (document.getElementById(s) as HTMLIonRadioElement).value;
       payload.push(resp);
-      console.log(s, resp, this.preguntas[s]['correcta']);
+      //console.log(s, resp, this.preguntas[s]['correcta']);
       if(resp == this.preguntas[s]['correcta'])
       {
         aciertos+= 1;
@@ -86,7 +86,5 @@ export class Tab6Page implements OnInit {
       
     }
   }
-
-  
 
 }
