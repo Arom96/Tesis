@@ -1,4 +1,4 @@
-# Tesis
+# Tesis :computer:
 TRABAJO FINAL PREVIA LA OBTENCIÓN DEL TÍTULO PROFESIONAL
 ## Integrantes: 
 
